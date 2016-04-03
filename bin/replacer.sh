@@ -169,6 +169,9 @@ for sourceFile in $(find "$targetPath" -not \( -path "$targetPath/dev-lib/*" -o 
 		replaceAllOccurrences $sourceFile "GoDaddy Email Marketing" "Mad Mimi Sign Up Forms" "$ALLOWED_FILES_MASK$" $saveChanges
 		replaceAllOccurrences $sourceFile "gem" "mimi" "$ALLOWED_FILES_MASK$" $saveChanges
 		replaceAllOccurrences $sourceFile "GEM" "Mad_Mimi" "$ALLOWED_FILES_MASK$" $saveChanges
+		replaceAllOccurrences $sourceFile "wp-godaddy-email-marketing" "madmimi-wp" "$ALLOWED_FILES_MASK$" $saveChanges
+		replaceAllOccurrences $sourceFile "godaddy" "madmimi" "$ALLOWED_FILES_MASK$" $saveChanges
+		replaceAllOccurrences $sourceFile "GoDaddy" "Mad Mimi" "$ALLOWED_FILES_MASK$" $saveChanges
 		
 		renameFile $sourceFile "gem" "mimi" $saveChanges
 		renameFile $sourceFile "godaddy" "madmimi" $saveChanges
