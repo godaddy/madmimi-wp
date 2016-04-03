@@ -164,7 +164,7 @@ else
 	echo "Dry run mode is disabled, all changes will be saved"
 fi
 
-for sourceFile in $(find "$targetPath" -name .git -a -type d -prune -o -print); do
+for sourceFile in $(find "$targetPath" -not \( -path "$targetPath/dev-lib/*" -o -path "$targetPath/.git/*" \)); do
 	if [ -f "$sourceFile" ]; then
 		replaceAllOccurrences $sourceFile "GoDaddy Email Marketing" "Mad Mimi Sign Up Forms" "$ALLOWED_FILES_MASK$" $saveChanges
 		replaceAllOccurrences $sourceFile "gem" "mimi" "$ALLOWED_FILES_MASK$" $saveChanges
