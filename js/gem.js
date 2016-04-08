@@ -2,17 +2,17 @@
 
 	"use strict";
 
-	var GEM = window.GEM || {};
+	var Mad_Mimi = window.Mad_Mimi || {};
 
 	/**
 	 * Constants
 	 */
-	GEM.DEBUG_FLAG = true;
+	Mad_Mimi.DEBUG_FLAG = true;
 
-	GEM.init = function() {
+	Mad_Mimi.init = function() {
 
 		// Handles form submissions
-		$( 'form.gem-form' ).submit( function( e ) {
+		$( 'form.mimi-form' ).submit( function( e ) {
 
 			e.preventDefault();
 
@@ -81,30 +81,30 @@
 			//end of multiple date dropdown select code
 
 			var $wrapper = $( this ),
-				$spinner = $( '.gem-spinner', $wrapper ),
+				$spinner = $( '.mimi-spinner', $wrapper ),
 
 				/* needed only when using WP as a proxy.
-				payload = $.extend( {}, $( this ).gemSerializeObject(), {
-					action: 'gem-submit-form'
+				payload = $.extend( {}, $( this ).mimiSerializeObject(), {
+					action: 'mimi-submit-form'
 				} ),
 				*/
 
 				payload = $( this ).serialize(),
 				invalidElements = [],
-				m = GEM;
+				m = Mad_Mimi;
 
 			// make sure to clear all "invalid" elements before re-validating
-			$wrapper.find( 'input.gem-invalid' ).removeClass( 'gem-invalid' );
+			$wrapper.find( 'input.mimi-invalid' ).removeClass( 'mimi-invalid' );
 
 			$( this ).find( ':input' ).each( function( i ) {
 
-			 	if ( 'signup[email]' == $( this ).attr( 'name' ) && ! GEM.isEmail( $( this ).val() ) ) {
+			 	if ( 'signup[email]' == $( this ).attr( 'name' ) && ! Mad_Mimi.isEmail( $( this ).val() ) ) {
 
 					// email not valid
 					invalidElements.push( $( this ) );
 					m.log( 'Email is NOT valid' );
 
-				} else if ( $( this ).is( '.gem-required' ) && '' == $( this ).val() ) {
+				} else if ( $( this ).is( '.mimi-required' ) && '' == $( this ).val() ) {
 					invalidElements.push( $( this ) );
 					m.log( 'A required filled was not filled' );
 				}
@@ -131,13 +131,13 @@
 								window.location.href = d.redirect;
 							}
 
-							$wrapper.html( GEM.addMessage(
+							$wrapper.html( Mad_Mimi.addMessage(
 								is_suppressed ? [ 'suppressed', 'success' ] : [ 'info', 'success' ],
-								is_suppressed ? GEM.thankyou_suppressed : GEM.thankyou )
+								is_suppressed ? Mad_Mimi.thankyou_suppressed : Mad_Mimi.thankyou )
 							).fadeIn( 'fast' );
 
 						} else {
-							$wrapper.html( GEM.addMessage( 'info', GEM.oops ) ).fadeIn( 'fast' );
+							$wrapper.html( Mad_Mimi.addMessage( 'info', Mad_Mimi.oops ) ).fadeIn( 'fast' );
 						}
 
 					} );
@@ -148,48 +148,48 @@
 
 				// there are invalid elements
 				$( invalidElements ).each( function( i, el ) {
-					$( this ).addClass( 'gem-invalid' );
+					$( this ).addClass( 'mimi-invalid' );
 				} );
 
-				var previousNotifications = $wrapper.find( '.gem-error, .gem-info' );
+				var previousNotifications = $wrapper.find( '.mimi-error, .mimi-info' );
 
 				if ( 0 != previousNotifications.length ) {
 					previousNotifications.remove();
 				}
 
-				$wrapper.prepend( GEM.addMessage( 'error', GEM.fix ) );
+				$wrapper.prepend( Mad_Mimi.addMessage( 'error', Mad_Mimi.fix ) );
 
 			}
 
 		} );
 	};
 
-	GEM.addMessage = function( type, message ) {
+	Mad_Mimi.addMessage = function( type, message ) {
 
 		var _class = [];
 
 		if ( $.isArray( type ) ) {
 
 			$.each( type, function( index, value ) {
-				_class.push( 'gem-' + value );
+				_class.push( 'mimi-' + value );
 			} );
 
 		} else {
-			_class.push( 'gem-' + type.toString() );
+			_class.push( 'mimi-' + type.toString() );
 		}
 
 		return $( '<p/>', { class: _class.join( ' ' ) } ).text( message );
 
 	}
 
-	GEM.isEmail = function ( email ) {
+	Mad_Mimi.isEmail = function ( email ) {
 		var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		return regex.test( email );
 	}
 
-	GEM.log = function( message ) {
+	Mad_Mimi.log = function( message ) {
 
-		if ( GEM.DEBUG_FLAG && window.console ) {
+		if ( Mad_Mimi.DEBUG_FLAG && window.console ) {
 			console.log( message );
 		}
 
@@ -198,7 +198,7 @@
 	/**
 	 * ==== Helpers + Utilities ====
 	 */
-	$.fn.gemSerializeObject = function() {
+	$.fn.mimiSerializeObject = function() {
 
 		var o = {};
 		var a = this.serializeArray();
@@ -225,6 +225,6 @@
 	/**
 	 * Constructor
 	 */
-	$( document ).ready( GEM.init );
+	$( document ).ready( Mad_Mimi.init );
 
 } )( jQuery );

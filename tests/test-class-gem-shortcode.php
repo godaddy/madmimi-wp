@@ -1,5 +1,5 @@
 <?php
-class Test_GEM_Shortcode extends WP_UnitTestCase {
+class Test_Mad_Mimi_Shortcode extends WP_UnitTestCase {
 
 	/**
 	 * Load WP_Http_Mock_Transport
@@ -9,7 +9,7 @@ class Test_GEM_Shortcode extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @var GEM_Shortcode
+	 * @var Mad_Mimi_Shortcode
 	 */
 	private $instance;
 
@@ -20,7 +20,7 @@ class Test_GEM_Shortcode extends WP_UnitTestCase {
 	 */
 	function setUp() {
 		parent::setUp();
-		$this->instance = new GEM_Shortcode();
+		$this->instance = new Mad_Mimi_Shortcode();
 		add_action( 'http_api_transports', array( $this, 'get_transports' ) );
 	}
 
@@ -35,7 +35,7 @@ class Test_GEM_Shortcode extends WP_UnitTestCase {
 	}
 
 	public function test_basics() {
-		$this->assertTrue( class_exists( 'GEM_Shortcode', false ) );
+		$this->assertTrue( class_exists( 'Mad_Mimi_Shortcode', false ) );
 	}
 
 	public function test_render() {
@@ -53,11 +53,11 @@ class Test_GEM_Shortcode extends WP_UnitTestCase {
 		return $response;
 	}
 
-	public function test_gem_form() {
-		$this->assertTrue( function_exists( 'gem_form' ) );
+	public function test_mimi_form() {
+		$this->assertTrue( function_exists( 'mimi_form' ) );
 	}
 
-	public function test_gem_form_function() {
+	public function test_mimi_form_function() {
 		$sample_data = array(
 			'fields' => array(
 				'field_a' => array(
@@ -88,7 +88,7 @@ class Test_GEM_Shortcode extends WP_UnitTestCase {
 		);
 
 		ob_start();
-		gem_form( 123 );
+		mimi_form( 123 );
 		$actual_output = ob_get_contents();
 		ob_end_clean();
 		$this->assertNotEmpty( $actual_output );

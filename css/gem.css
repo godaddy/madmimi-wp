@@ -4,23 +4,23 @@
  * Fields
  */
 
-form.gem-form p {
+form.mimi-form p {
 	padding: 0;
 }
 
-input.gem-invalid {
+input.mimi-invalid {
 	border: 1px solid red;
 }
 
-.gem-field {
+.mimi-field {
 	display: block;
 }
 
-form.gem-form label {
+form.mimi-form label {
 	display: inline !important;
 }
 
-.gem-spinner {
+.mimi-spinner {
 	display: none;
 	background: url( '../images/spinner.gif' ) no-repeat;
 	background-size: 20px 20px;
@@ -28,14 +28,14 @@ form.gem-form label {
 	height: 20px;
 }
 
-.gem-submit {
+.mimi-submit {
 	cursor: pointer;
 }
 
 /**
  * Messages
  */
-.gem-error {
+.mimi-error {
 	background-color: #ffebe8;
 	border: 1px solid #c00;
 	padding: 0.5em 1em;
@@ -52,7 +52,7 @@ form.gem-form label {
   (-webkit-min-device-pixel-ratio: 1.25),
   (min-resolution: 120dpi) {
 
-	.gem-spinner {
+	.mimi-spinner {
 		background-image: url( '../images/spinner-2x.gif' );
 	}
 }

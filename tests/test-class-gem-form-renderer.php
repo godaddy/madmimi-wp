@@ -1,8 +1,8 @@
 <?php
-class Test_GEM_Form_Renderer extends WP_UnitTestCase {
+class Test_Mad_Mimi_Form_Renderer extends WP_UnitTestCase {
 
 	/**
-	 * @var GEM_Form_Renderer
+	 * @var Mad_Mimi_Form_Renderer
 	 */
 	private $instance;
 
@@ -20,7 +20,7 @@ class Test_GEM_Form_Renderer extends WP_UnitTestCase {
 	 */
 	function setUp() {
 		parent::setUp();
-		$this->instance = new GEM_Form_Renderer();
+		$this->instance = new Mad_Mimi_Form_Renderer();
 		add_action( 'http_api_transports', array( $this, 'get_transports' ) );
 	}
 
@@ -35,7 +35,7 @@ class Test_GEM_Form_Renderer extends WP_UnitTestCase {
 	}
 
 	public function test_basics() {
-		$this->assertTrue( class_exists( 'GEM_Form_Renderer', false ) );
+		$this->assertTrue( class_exists( 'Mad_Mimi_Form_Renderer', false ) );
 	}
 
 	public function test_process() {
@@ -77,16 +77,16 @@ class Test_GEM_Form_Renderer extends WP_UnitTestCase {
 		);
 		$actual_result = $this->instance->process( 123 );
 
-		$this->assertContains( '<div class="gem-form-wrapper" id="form-123">', $actual_result );
-		$this->assertContains( '<form action="http://the_url" method="post" class="gem-form">', $actual_result );
+		$this->assertContains( '<div class="mimi-form-wrapper" id="form-123">', $actual_result );
+		$this->assertContains( '<form action="http://the_url" method="post" class="mimi-form">', $actual_result );
 		$this->assertContains( '<input type="hidden" name="form_id" value="0" />', $actual_result );
-		$this->assertContains( '<input type="submit" value="button_text" class="button gem-submit" />', $actual_result );
+		$this->assertContains( '<input type="submit" value="button_text" class="button mimi-submit" />', $actual_result );
 		$this->assertContains( 'text_a', $actual_result );
 		$this->assertContains( 'text_b', $actual_result );
 		$this->assertContains( '<label for="form_1_the_name_a">', $actual_result );
-		$this->assertContains( '<input type="text" name="the_name_a" id="form_1_the_name_a" class="gem-field" />', $actual_result );
+		$this->assertContains( '<input type="text" name="the_name_a" id="form_1_the_name_a" class="mimi-field" />', $actual_result );
 		$this->assertContains( '<label for="form_1_the_name_bthe_value">', $actual_result );
-		$this->assertContains( '<input type="checkbox" value="the_value" name="the_name_b" id="form_1_the_name_bthe_value" class="gem-checkbox gem-required" />', $actual_result );
+		$this->assertContains( '<input type="checkbox" value="the_value" name="the_name_b" id="form_1_the_name_bthe_value" class="mimi-checkbox mimi-required" />', $actual_result );
 
 		ob_start();
 		$this->instance->process( 123, true );

@@ -2,15 +2,15 @@
 /**
  * Settings classes
  *
- * @package GEM
+ * @package Mad_Mimi
  */
 
 /**
- * GoDaddy Email Marketing settings.
+ * Mad Mimi Sign Up Forms settings.
  *
  * @since 1.0
  */
-class GEM_Settings {
+class Mad_Mimi_Settings {
 
 	/**
 	 * The page slug.
@@ -27,17 +27,17 @@ class GEM_Settings {
 	public $hook;
 
 	/**
-	 * GEM_Official instance.
+	 * Mad_Mimi_Official instance.
 	 *
-	 * @var GEM_Official
+	 * @var Mad_Mimi_Official
 	 */
-	private $gem;
+	private $mimi;
 
 	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
-		$this->gem = gem();
+		$this->mimi = mimi();
 
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
@@ -50,10 +50,10 @@ class GEM_Settings {
 	 */
 	public function action_admin_menu() {
 		$this->hook = add_options_page(
-			__( 'GoDaddy Email Marketing Settings', 'godaddy-email-marketing' ),
-			__( 'GoDaddy Signup Forms', 'godaddy-email-marketing' ),
+			__( 'Mad Mimi Sign Up Forms Settings', 'madmimi-email-marketing' ),
+			__( 'Mad Mimi Signup Forms', 'madmimi-email-marketing' ),
 			'manage_options',
-			$this->slug = 'gem-settings',
+			$this->slug = 'mimi-settings',
 			array( $this, 'display_settings_page' )
 		);
 
@@ -73,33 +73,33 @@ class GEM_Settings {
 
 			switch ( $_GET['action'] ) {
 				case 'debug-reset' :
-					if ( ! $this->gem->debug ) {
+					if ( ! $this->mimi->debug ) {
 						return;
 					}
 
 					if ( isset( $settings['username'] ) ) {
-						delete_transient( 'gem-' . $settings['username'] . '-lists' );
+						delete_transient( 'mimi-' . $settings['username'] . '-lists' );
 					}
 
 					delete_option( $this->slug );
 
 					break;
 				case 'debug-reset-transients' :
-					if ( ! $this->gem->debug ) {
+					if ( ! $this->mimi->debug ) {
 						return;
 					}
 
 					if ( isset( $settings['username'] ) ) {
 
 						// Remove all lists.
-						delete_transient( 'gem-' . $settings['username'] . '-lists' );
+						delete_transient( 'mimi-' . $settings['username'] . '-lists' );
 
 						// Mass-removal of all forms.
-						foreach ( GEM_Dispatcher::get_forms()->signups as $form ) {
-							delete_transient( 'gem-form-' . $form->id );
+						foreach ( Mad_Mimi_Dispatcher::get_forms()->signups as $form ) {
+							delete_transient( 'mimi-form-' . $form->id );
 						}
 
-						add_settings_error( $this->slug, 'gem-reset', __( 'All transients were removed.', 'godaddy-email-marketing' ), 'updated' );
+						add_settings_error( $this->slug, 'mimi-reset', __( 'All transients were removed.', 'madmimi-email-marketing' ), 'updated' );
 					}
 
 					break;
@@ -108,16 +108,16 @@ class GEM_Settings {
 					// Remove only the lists for the current user.
 					if ( isset( $settings['username'] ) ) {
 
-						if ( delete_transient( 'gem-' . $settings['username'] . '-lists' ) ) {
-							add_settings_error( $this->slug, 'gem-reset', __( 'Forms list was successfully updated.', 'godaddy-email-marketing' ), 'updated' );
+						if ( delete_transient( 'mimi-' . $settings['username'] . '-lists' ) ) {
+							add_settings_error( $this->slug, 'mimi-reset', __( 'Forms list was successfully updated.', 'madmimi-email-marketing' ), 'updated' );
 						}
 					}
 
-					$forms = GEM_Dispatcher::get_forms();
+					$forms = Mad_Mimi_Dispatcher::get_forms();
 
 					if ( isset( $forms->signups ) ) {
 						foreach ( (array) $forms->signups as $form ) {
-							delete_transient( 'gem-form-' . $form->id );
+							delete_transient( 'mimi-form-' . $form->id );
 						}
 					}
 
@@ -128,7 +128,7 @@ class GEM_Settings {
 					}
 
 					// @codeCoverageIgnoreStart
-					$tokenized_url = add_query_arg( 'redirect', sprintf( '/signups/%d/edit', absint( $_GET['form_id'] ) ), GEM_Dispatcher::user_sign_in() );
+					$tokenized_url = add_query_arg( 'redirect', sprintf( '/signups/%d/edit', absint( $_GET['form_id'] ) ), Mad_Mimi_Dispatcher::user_sign_in() );
 
 					// Not wp_safe_redirect as it's an external site.
 					wp_redirect( $tokenized_url );
@@ -143,7 +143,7 @@ class GEM_Settings {
 						return;
 					}
 
-					update_user_meta( $user_id, 'gem-dismiss', 'show' );
+					update_user_meta( $user_id, 'mimi-dismiss', 'show' );
 
 					break;
 			}
@@ -155,7 +155,7 @@ class GEM_Settings {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 		// Enqueue the CSS for the admin.
-		wp_enqueue_style( 'gem-admin', plugins_url( "css/admin{$suffix}.css", GEM_PLUGIN_BASE ) );
+		wp_enqueue_style( 'mimi-admin', plugins_url( "css/admin{$suffix}.css", Mad_Mimi_PLUGIN_BASE ) );
 	}
 
 	/**
@@ -168,32 +168,32 @@ class GEM_Settings {
 
 		// @todo Remove HTML from the translation strings.
 		$screen->add_help_tab( array(
-			'title'   => __( 'Overview', 'godaddy-email-marketing' ),
-			'id'      => 'gem-overview',
+			'title'   => __( 'Overview', 'madmimi-email-marketing' ),
+			'id'      => 'mimi-overview',
 			'content' => sprintf(
 				'<h3>%s</h3><p>%s</p><ul><li>%s</li><li>%s</li><li>%s</li></ul>',
-				esc_html__( 'Instructions', 'godaddy-email-marketing' ),
+				esc_html__( 'Instructions', 'madmimi-email-marketing' ),
 				sprintf(
-					esc_html__( 'Once the plugin is activated, you will be able to select and insert any of your GoDaddy Email Marketing webforms right into your site. Setup is easy. Below, simply enter your account email address and API key (found in your GoDaddy Email Marketing account [%s] area). Here are the 3 ways you can display a webform on your site:', 'godaddy-email-marketing' ),
-					'<a href="https://gem.godaddy.com/user/edit" target="_blank">https://gem.godaddy.com/user/edit</a>'
+					esc_html__( 'Once the plugin is activated, you will be able to select and insert any of your Mad Mimi Sign Up Forms webforms right into your site. Setup is easy. Below, simply enter your account email address and API key (found in your Mad Mimi Sign Up Forms account [%s] area). Here are the 3 ways you can display a webform on your site:', 'madmimi-email-marketing' ),
+					'<a href="https://mimi.madmimi.com/user/edit" target="_blank">https://mimi.madmimi.com/user/edit</a>'
 				),
-				__( '<strong>Widget:</strong> Go to Appearance &rarr; widgets and find the widget called “GoDaddy Email Marketing Form” and drag it into the widget area of your choice. You can then add a title and select a form!', 'godaddy-email-marketing' ),
-				__( '<strong>Shortcode:</strong> You can add a form to any post or page by adding the shortcode (ex. <code>[gem id=80326]</code>) in the page/post editor.', 'godaddy-email-marketing' ),
+				__( '<strong>Widget:</strong> Go to Appearance &rarr; widgets and find the widget called “Mad Mimi Sign Up Forms Form” and drag it into the widget area of your choice. You can then add a title and select a form!', 'madmimi-email-marketing' ),
+				__( '<strong>Shortcode:</strong> You can add a form to any post or page by adding the shortcode (ex. <code>[mimi id=80326]</code>) in the page/post editor.', 'madmimi-email-marketing' ),
 				sprintf(
-					__( '<strong>Template Tag:</strong> You can add the following template tag into any WordPress file: <code>%s</code>. Ex. <code>%s</code>', 'godaddy-email-marketing' ),
-					'&lt;?php gem_form( $form_id ); ?&gt;',
-					'&lt;?php gem_form( 91 ); ?&gt;'
+					__( '<strong>Template Tag:</strong> You can add the following template tag into any WordPress file: <code>%s</code>. Ex. <code>%s</code>', 'madmimi-email-marketing' ),
+					'&lt;?php mimi_form( $form_id ); ?&gt;',
+					'&lt;?php mimi_form( 91 ); ?&gt;'
 				)
 			),
 		) );
 
 		$screen->set_help_sidebar(
 			sprintf(
-				'<p><strong>%s</strong></p><p><a href="https://godaddy.com" target="_blank">%s</a></p><p><a href="https://support.godaddy.com/" target="_blank">%s</a></p><p><a href="https://support.godaddy.com/" target="_blank" class="button">%s</a></p>',
-				esc_html__( 'For more information:', 'godaddy-email-marketing' ),
-				esc_html__( 'GoDaddy', 'godaddy-email-marketing' ),
-				esc_html__( 'GoDaddy Help', 'godaddy-email-marketing' ),
-				esc_html__( 'Contact GoDaddy', 'godaddy-email-marketing' )
+				'<p><strong>%s</strong></p><p><a href="https://madmimi.com" target="_blank">%s</a></p><p><a href="https://support.madmimi.com/" target="_blank">%s</a></p><p><a href="https://support.madmimi.com/" target="_blank" class="button">%s</a></p>',
+				esc_html__( 'For more information:', 'madmimi-email-marketing' ),
+				esc_html__( 'Mad Mimi', 'madmimi-email-marketing' ),
+				esc_html__( 'Mad Mimi Help', 'madmimi-email-marketing' ),
+				esc_html__( 'Contact Mad Mimi', 'madmimi-email-marketing' )
 			)
 		);
 	}
@@ -208,66 +208,66 @@ class GEM_Settings {
 
 		// If no options exist, create them.
 		if ( ! get_option( $this->slug ) ) {
-			update_option( $this->slug, apply_filters( 'gem_default_options', array(
+			update_option( $this->slug, apply_filters( 'mimi_default_options', array(
 				'username' => '',
 				'api-key'  => '',
 			) ) );
 		}
 
-		register_setting( 'gem-options', $this->slug, array( $this, 'validate' ) );
+		register_setting( 'mimi-options', $this->slug, array( $this, 'validate' ) );
 
 		// First, we register a section. This is necessary since all future options must belong to one.
 		add_settings_section(
 			'general_settings_section',
-			__( 'Account Details', 'godaddy-email-marketing' ),
-			array( 'GEM_Settings_Controls', 'description' ),
+			__( 'Account Details', 'madmimi-email-marketing' ),
+			array( 'Mad_Mimi_Settings_Controls', 'description' ),
 			$this->slug
 		);
 
 		add_settings_field(
 			'username',
-			__( 'GoDaddy Email Marketing Username', 'godaddy-email-marketing' ),
-			array( 'GEM_Settings_Controls', 'text' ),
+			__( 'Mad Mimi Sign Up Forms Username', 'madmimi-email-marketing' ),
+			array( 'Mad_Mimi_Settings_Controls', 'text' ),
 			$this->slug,
 			'general_settings_section',
 			array(
 				'id' => 'username',
 				'page' => $this->slug,
-				'description' => __( 'Your GoDaddy Email Marketing username (email address)', 'godaddy-email-marketing' ),
+				'description' => __( 'Your Mad Mimi Sign Up Forms username (email address)', 'madmimi-email-marketing' ),
 				'label_for' => $this->slug . '-username',
 			)
 		);
 
 		add_settings_field(
 			'api-key',
-			__( 'GoDaddy Email Marketing API Key', 'godaddy-email-marketing' ),
-			array( 'GEM_Settings_Controls', 'text' ),
+			__( 'Mad Mimi Sign Up Forms API Key', 'madmimi-email-marketing' ),
+			array( 'Mad_Mimi_Settings_Controls', 'text' ),
 			$this->slug,
 			'general_settings_section',
 			array(
 				'id' => 'api-key',
 				'page' => $this->slug,
-				'description' => sprintf( '<a target="_blank" href="%s">%s</a>', 'https://www.godaddy.com/help/find-api-key-15909', _x( 'Where can I find my API key?', 'settings page', 'godaddy-email-marketing' ) ),
+				'description' => sprintf( '<a target="_blank" href="%s">%s</a>', 'https://www.madmimi.com/help/find-api-key-15909', _x( 'Where can I find my API key?', 'settings page', 'madmimi-email-marketing' ) ),
 				'label_for' => $this->slug . '-api-key',
 			)
 		);
 
-		$user_info = GEM_Dispatcher::get_user_level();
+		$user_info = Mad_Mimi_Dispatcher::get_user_level();
 
 		add_settings_field(
 			'display_powered_by',
 			'',
-			array( 'GEM_Settings_Controls', 'checkbox' ),
+			array( 'Mad_Mimi_Settings_Controls', 'checkbox' ),
 			$this->slug,
 			'general_settings_section',
 			array(
 				'id' => 'display_powered_by',
 				'page' => $this->slug,
-				'label' => __( 'Display "Powered by GoDaddy"?', 'godaddy-email-marketing' ),
+				'label' => __( 'Display "Powered by Mad Mimi"?', 'madmimi-email-marketing' ),
 			)
 		);
 
-		do_action( 'gem_setup_settings_fields' );
+		do_action( 'mimi_setup_settings_fields' );
 	}
 
 	/**
@@ -281,16 +281,16 @@ class GEM_Settings {
 
 			<?php screen_icon(); ?>
 
-			<h2><?php esc_html_e( 'GoDaddy Email Marketing Settings', 'godaddy-email-marketing' ); ?></h2>
+			<h2><?php esc_html_e( 'Mad Mimi Sign Up Forms Settings', 'madmimi-email-marketing' ); ?></h2>
 
-			<?php if ( ! GEM_Settings_Controls::get_option( 'username' ) ) : ?>
+			<?php if ( ! Mad_Mimi_Settings_Controls::get_option( 'username' ) ) : ?>
 
-				<div class="gem-identity updated notice">
+				<div class="mimi-identity updated notice">
 
-					<h3><?php echo esc_html_x( 'Enjoy the GoDaddy Email Marketing Experience, first hand.', 'gem header note', 'godaddy-email-marketing' ); ?></h3>
+					<h3><?php echo esc_html_x( 'Enjoy the Mad Mimi Sign Up Forms Experience, first hand.', 'mimi header note', 'madmimi-email-marketing' ); ?></h3>
 
-					<p><?php echo esc_html_x( 'Add your GoDaddy Email Marketing webform to your WordPress site! Easy to set up, the GoDaddy Email Marketing plugin allows your site visitors to subscribe to your email list.', 'header note', 'godaddy-email-marketing' ); ?></p>
-					<p class="description"><?php echo sprintf( esc_html_x( 'Don\'t have a GoDaddy Email Marketing account? Get one in less than 2 minutes! %s', 'header note', 'godaddy-email-marketing' ), sprintf( '<a target="_blank" href="https://godaddy.com/business/email-marketing" class="button">%s</a>', esc_html_x( 'Sign Up Now', 'header note', 'godaddy-email-marketing' ) ) ); ?></p>
+					<p><?php echo esc_html_x( 'Add your Mad Mimi Sign Up Forms webform to your WordPress site! Easy to set up, the Mad Mimi Sign Up Forms plugin allows your site visitors to subscribe to your email list.', 'header note', 'madmimi-email-marketing' ); ?></p>
+					<p class="description"><?php echo sprintf( esc_html_x( 'Don\'t have a Mad Mimi Sign Up Forms account? Get one in less than 2 minutes! %s', 'header note', 'madmimi-email-marketing' ), sprintf( '<a target="_blank" href="https://madmimi.com/business/email-marketing" class="button">%s</a>', esc_html_x( 'Sign Up Now', 'header note', 'madmimi-email-marketing' ) ) ); ?></p>
 
 				</div>
 
@@ -298,29 +298,29 @@ class GEM_Settings {
 
 			<form method="post" action="options.php">
 
-				<?php settings_fields( 'gem-options' );
+				<?php settings_fields( 'mimi-options' );
 
 				do_settings_sections( $this->slug );
 
-				submit_button( _x( 'Save Settings', 'save settings button', 'godaddy-email-marketing' ) ); ?>
+				submit_button( _x( 'Save Settings', 'save settings button', 'madmimi-email-marketing' ) ); ?>
 
-				<h3><?php esc_html_e( 'Available Forms', 'godaddy-email-marketing' ); ?></h3>
+				<h3><?php esc_html_e( 'Available Forms', 'madmimi-email-marketing' ); ?></h3>
 
 				<table class="wp-list-table widefat">
 
 					<thead>
 						<tr>
-							<th><?php esc_html_e( 'Form Name', 'godaddy-email-marketing' ); ?></th>
-							<th><?php esc_html_e( 'Form ID', 'godaddy-email-marketing' ); ?></th>
-							<th><?php esc_html_e( 'Shortcode', 'godaddy-email-marketing' ); ?></th>
+							<th><?php esc_html_e( 'Form Name', 'madmimi-email-marketing' ); ?></th>
+							<th><?php esc_html_e( 'Form ID', 'madmimi-email-marketing' ); ?></th>
+							<th><?php esc_html_e( 'Shortcode', 'madmimi-email-marketing' ); ?></th>
 						</tr>
 					</thead>
 
 					<tfoot>
 						<tr>
-							<th><?php esc_html_e( 'Form Name', 'godaddy-email-marketing' ); ?></th>
-							<th><?php esc_html_e( 'Form ID', 'godaddy-email-marketing' ); ?></th>
-							<th><?php esc_html_e( 'Shortcode', 'godaddy-email-marketing' ); ?></th>
+							<th><?php esc_html_e( 'Form Name', 'madmimi-email-marketing' ); ?></th>
+							<th><?php esc_html_e( 'Form ID', 'madmimi-email-marketing' ); ?></th>
+							<th><?php esc_html_e( 'Shortcode', 'madmimi-email-marketing' ); ?></th>
 						</tr>
 					</tfoot>
 
@@ -328,7 +328,7 @@ class GEM_Settings {
 
 					<?php
 
-					$forms = GEM_Dispatcher::get_forms();
+					$forms = Mad_Mimi_Dispatcher::get_forms();
 
 					if ( $forms && ! empty( $forms->signups ) ) :
 
@@ -346,16 +346,16 @@ class GEM_Settings {
 
 									<div class="row-actions">
 										<span class="edit">
-											<a target="_blank" href="<?php echo esc_url( $edit_link ); ?>" title="<?php esc_attr_e( 'Opens in a new window', 'godaddy-email-marketing' ); ?>"><?php esc_html_e( 'Edit form in GoDaddy Email Marketing', 'godaddy-email-marketing' ); ?></a> |
+											<a target="_blank" href="<?php echo esc_url( $edit_link ); ?>" title="<?php esc_attr_e( 'Opens in a new window', 'madmimi-email-marketing' ); ?>"><?php esc_html_e( 'Edit form in Mad Mimi Sign Up Forms', 'madmimi-email-marketing' ); ?></a> |
 										</span>
 										<span class="view">
-											<a target="_blank" href="<?php echo esc_url( $form->url ); ?>"><?php esc_html_e( 'Preview', 'godaddy-email-marketing' ); ?></a>
+											<a target="_blank" href="<?php echo esc_url( $form->url ); ?>"><?php esc_html_e( 'Preview', 'madmimi-email-marketing' ); ?></a>
 										</span>
 									</div>
 								</td>
 
 								<td><code><?php echo absint( $form->id ); ?></code></td>
-								<td><input type="text" class="code" value="[gem id=<?php echo absint( $form->id ); ?>]" onclick="this.select()" readonly /></td>
+								<td><input type="text" class="code" value="[mimi id=<?php echo absint( $form->id ); ?>]" onclick="this.select()" readonly /></td>
 
 							</tr>
 
@@ -363,7 +363,7 @@ class GEM_Settings {
 					else : ?>
 
 						<tr>
-							<td colspan="3"><?php esc_html_e( 'No forms found', 'godaddy-email-marketing' ); ?></td>
+							<td colspan="3"><?php esc_html_e( 'No forms found', 'madmimi-email-marketing' ); ?></td>
 						</tr>
 
 					<?php endif; ?>
@@ -374,15 +374,15 @@ class GEM_Settings {
 				<br />
 
 				<p class="description">
-					<?php esc_html_e( 'Not seeing your form?', 'godaddy-email-marketing' ); ?> <a href="<?php echo esc_url( add_query_arg( 'action', 'refresh' ) ); ?>" class="button"><?php esc_html_e( 'Refresh Forms', 'godaddy-email-marketing' ); ?></a>
+					<?php esc_html_e( 'Not seeing your form?', 'madmimi-email-marketing' ); ?> <a href="<?php echo esc_url( add_query_arg( 'action', 'refresh' ) ); ?>" class="button"><?php esc_html_e( 'Refresh Forms', 'madmimi-email-marketing' ); ?></a>
 				</p>
 
-				<?php if ( $this->gem->debug ) : ?>
+				<?php if ( $this->mimi->debug ) : ?>
 
-					<h3><?php esc_html_e( 'Debug', 'godaddy-email-marketing' ); ?></h3>
+					<h3><?php esc_html_e( 'Debug', 'madmimi-email-marketing' ); ?></h3>
 					<p>
-						<a href="<?php echo esc_url( add_query_arg( 'action', 'debug-reset' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Erase All Data', 'godaddy-email-marketing' ); ?></a>
-						<a href="<?php echo esc_url( add_query_arg( 'action', 'debug-reset-transients' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Erase Transients', 'godaddy-email-marketing' ); ?></a>
+						<a href="<?php echo esc_url( add_query_arg( 'action', 'debug-reset' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Erase All Data', 'madmimi-email-marketing' ); ?></a>
+						<a href="<?php echo esc_url( add_query_arg( 'action', 'debug-reset-transients' ) ); ?>" class="button-secondary"><?php esc_html_e( 'Erase Transients', 'madmimi-email-marketing' ); ?></a>
 					</p>
 
 				<?php endif; ?>
@@ -405,25 +405,25 @@ class GEM_Settings {
 		// Validate creds against the API.
 		if ( ! ( empty( $input['username'] ) || empty( $input['api-key'] ) ) ) {
 
-			$data = GEM_Dispatcher::fetch_forms( $input['username'], $input['api-key'] );
+			$data = Mad_Mimi_Dispatcher::fetch_forms( $input['username'], $input['api-key'] );
 
 			if ( ! $data ) {
 
 				// Credentials are incorrect.
-				add_settings_error( $this->slug, 'invalid-creds', __( 'The credentials are incorrect! Please verify that you have entered them correctly.', 'godaddy-email-marketing' ) );
+				add_settings_error( $this->slug, 'invalid-creds', __( 'The credentials are incorrect! Please verify that you have entered them correctly.', 'madmimi-email-marketing' ) );
 
 				return $input; // Bail!
 
 			} elseif ( ! empty( $data->total ) ) {
 
 				// Test the returned data, and let the user know she's alright!
-				add_settings_error( $this->slug, 'valid-creds', __( "Connection with GoDaddy Email Marketing has been established! You're all set!", 'godaddy-email-marketing' ), 'updated' );
+				add_settings_error( $this->slug, 'valid-creds', __( "Connection with Mad Mimi Sign Up Forms has been established! You're all set!", 'madmimi-email-marketing' ), 'updated' );
 
 			}
 		} else {
 
 			// Credentials are empty.
-			add_settings_error( $this->slug, 'invalid-creds', __( 'Please fill in the username and the API key first.', 'godaddy-email-marketing' ) );
+			add_settings_error( $this->slug, 'invalid-creds', __( 'Please fill in the username and the API key first.', 'madmimi-email-marketing' ) );
 
 		}
 
@@ -432,11 +432,11 @@ class GEM_Settings {
 }
 
 /**
- * GoDaddy Email Marketing settings controls.
+ * Mad Mimi Sign Up Forms settings controls.
  *
  * @since 1.0
  */
-final class GEM_Settings_Controls {
+final class Mad_Mimi_Settings_Controls {
 
 	/**
 	 * Displays the unauthenticated description.
@@ -444,7 +444,7 @@ final class GEM_Settings_Controls {
 	public static function description() {
 		printf(
 			'<p>%s</p>',
-			esc_html__( 'Please enter your GoDaddy Email Marketing username and API Key in order to be able to create forms.', 'godaddy-email-marketing' )
+			esc_html__( 'Please enter your Mad Mimi Sign Up Forms username and API Key in order to be able to create forms.', 'madmimi-email-marketing' )
 		);
 	}
 
@@ -533,7 +533,7 @@ final class GEM_Settings_Controls {
 	 * @return false|mixed Returns the settings value or false.
 	 */
 	public static function get_option( $key = '' ) {
-		$settings = get_option( 'gem-settings' );
+		$settings = get_option( 'mimi-settings' );
 
 		return ( ! empty( $settings[ $key ] ) ) ? $settings[ $key ] : false;
 	}

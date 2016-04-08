@@ -2,15 +2,15 @@
 /**
  * Shortcode class & template tag
  *
- * @package GEM
+ * @package Mad_Mimi
  */
 
 /**
- * GoDaddy Email Marketing shortcode.
+ * Mad Mimi Sign Up Forms shortcode.
  *
  * @since 1.0
  */
-class GEM_Shortcode {
+class Mad_Mimi_Shortcode {
 
 	/**
 	 * Renders the shortcode.
@@ -26,7 +26,7 @@ class GEM_Shortcode {
 			return;
 		}
 
-		return gem_form( $id, false );
+		return mimi_form( $id, false );
 	}
 }
 
@@ -34,14 +34,14 @@ class GEM_Shortcode {
  * The main template tag. Pass on the ID and watch the magic happen.
  *
  * @since 1.0
- * @see GEM_Form_Renderer
+ * @see Mad_Mimi_Form_Renderer
  *
  * @param int  $id The ID of the form you wish to output.
  * @param bool $echo Wether to echo the form field. Default true.
  */
-function gem_form( $id, $echo = true ) {
-	if ( class_exists( 'GEM_Form_Renderer', false ) ) {
-		$renderer = new GEM_Form_Renderer();
+function mimi_form( $id, $echo = true ) {
+	if ( class_exists( 'Mad_Mimi_Form_Renderer', false ) ) {
+		$renderer = new Mad_Mimi_Form_Renderer();
 		$renderer->process( $id, $echo );
 	}
 }

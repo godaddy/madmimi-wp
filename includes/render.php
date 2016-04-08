@@ -2,15 +2,15 @@
 /**
  * Render classes
  *
- * @package GEM
+ * @package Mad_Mimi
  */
 
 /**
- * GoDaddy Email Marketing form.
+ * Mad Mimi Sign Up Forms form.
  *
  * @since 1.0
  */
-class GEM_Form_Renderer {
+class Mad_Mimi_Form_Renderer {
 
 	/**
 	 * Form instance number.
@@ -26,37 +26,37 @@ class GEM_Form_Renderer {
 	 * @param bool   $echo Wether to echo the form field. Default false.
 	 */
 	public function process( $form_id, $echo = false ) {
-		$form = GEM_Dispatcher::get_fields( (int) $form_id );
+		$form = Mad_Mimi_Dispatcher::get_fields( (int) $form_id );
 
 		if ( ! empty( $form->fields ) ) :
 
 			self::$loops++; ob_start(); ?>
 
-			<div class="gem-form-wrapper" id="form-<?php echo absint( $form_id ); ?>">
-				<form action="<?php echo esc_url( $form->submit ); ?>" method="post" class="gem-form">
+			<div class="mimi-form-wrapper" id="form-<?php echo absint( $form_id ); ?>">
+				<form action="<?php echo esc_url( $form->submit ); ?>" method="post" class="mimi-form">
 
-					<?php do_action( 'gem_before_fields', $form_id, $form->fields ); ?>
+					<?php do_action( 'mimi_before_fields', $form_id, $form->fields ); ?>
 
 					<?php foreach ( $form->fields as $count => $field ) : ?>
 
-						<p><?php GEM_Form_Fields::dispatch_field( $field, self::$loops ); ?></p>
+						<p><?php Mad_Mimi_Form_Fields::dispatch_field( $field, self::$loops ); ?></p>
 
 					<?php endforeach; ?>
 
-					<?php do_action( 'gem_after_fields', $form_id, $form->fields ); ?>
+					<?php do_action( 'mimi_after_fields', $form_id, $form->fields ); ?>
 
 					<p>
 						<input type="hidden" name="form_id" value="<?php echo absint( $form->id ); ?>" />
-						<input type="submit" value="<?php echo esc_attr( $form->button_text ); ?>" class="button gem-submit" />
-						<span class="gem-spinner"></span>
+						<input type="submit" value="<?php echo esc_attr( $form->button_text ); ?>" class="button mimi-submit" />
+						<span class="mimi-spinner"></span>
 					</p>
 
-					<?php $show_powered_by = GEM_Settings_Controls::get_option( 'display_powered_by' ) ? true : false;
+					<?php $show_powered_by = Mad_Mimi_Settings_Controls::get_option( 'display_powered_by' ) ? true : false;
 
 					if ( $show_powered_by ) : ?>
 
 						<p>
-							<a href="https://www.godaddy.com/business/email-marketing/" target="_blank"><?php esc_html_e( 'Powered by GoDaddy', 'godaddy-email-marketing' ); ?></a>
+							<a href="https://www.madmimi.com/business/email-marketing/" target="_blank"><?php esc_html_e( 'Powered by Mad Mimi', 'madmimi-email-marketing' ); ?></a>
 						</p>
 
 					<?php endif; ?>
@@ -77,11 +77,11 @@ class GEM_Form_Renderer {
 }
 
 /**
- * GoDaddy Email Marketing form fields.
+ * Mad Mimi Sign Up Forms form fields.
  *
  * @since 1.0
  */
-class GEM_Form_Fields {
+class Mad_Mimi_Form_Fields {
 
 	/**
 	 * Form instance number.
@@ -125,26 +125,26 @@ class GEM_Form_Fields {
 	/**
 	 * Displays the string field.
 	 *
-	 * @todo How is this differnt from the GEM_Form_Fields::text_field method?
+	 * @todo How is this differnt from the Mad_Mimi_Form_Fields::text_field method?
 	 *
 	 * @param array $args Settings field arguments.
 	 */
 	public static function string( $args ) {
-		$field_classes = array( 'gem-field' );
+		$field_classes = array( 'mimi-field' );
 
 		// Is this field required?
 		if ( $args->required ) {
-			$field_classes[] = 'gem-required';
+			$field_classes[] = 'mimi-required';
 		}
 
-		$field_classes = (array) apply_filters( 'gem_required_field_class', $field_classes, $args );
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
 		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
 			<?php echo esc_html( $args->display ); ?>
 
-			<?php if ( $args->required && apply_filters( 'gem_required_field_indicator', true, $args ) ) : ?>
+			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 
@@ -162,14 +162,14 @@ class GEM_Form_Fields {
 	 * @param array $args Settings field arguments.
 	 */
 	public static function checkbox( $args ) {
-		$field_classes = array( 'gem-checkbox' );
+		$field_classes = array( 'mimi-checkbox' );
 
 		// Is this field required?
 		if ( $args->required ) {
-			$field_classes[] = 'gem-required';
+			$field_classes[] = 'mimi-required';
 		}
 
-		$field_classes = (array) apply_filters( 'gem_required_field_class', $field_classes, $args );
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
 		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) . $args->value ); ?>">
@@ -178,7 +178,7 @@ class GEM_Form_Fields {
 
 			<?php echo esc_html( $args->display ); ?>
 
-			<?php if ( $args->required && apply_filters( 'gem_required_field_indicator', true, $args ) ) : ?>
+			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 
@@ -198,7 +198,7 @@ class GEM_Form_Fields {
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 			<?php echo esc_html( $args->display ); ?>
-			<?php if ( $args->required && apply_filters( 'gem_required_field_indicator', true, $args ) ) : ?>
+			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 		</label>
@@ -230,7 +230,7 @@ class GEM_Form_Fields {
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 			<?php echo esc_html( $args->display ); ?>
-			<?php if ( $args->required && apply_filters( 'gem_required_field_indicator', true, $args ) ) : ?>
+			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 		</label>
@@ -264,7 +264,7 @@ class GEM_Form_Fields {
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 			<?php echo esc_html( $args->display ); ?>
-			<?php if ( $args->required && apply_filters( 'gem_required_field_indicator', true, $args ) ) : ?>
+			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 		</label>
@@ -295,7 +295,7 @@ class GEM_Form_Fields {
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 			<?php echo esc_html( $args->display ); ?>
-			<?php if ( $args->required && apply_filters( 'gem_required_field_indicator', true, $args ) ) : ?>
+			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 		</label>
@@ -305,24 +305,24 @@ class GEM_Form_Fields {
 
 			<span class="third">
 				<select fingerprint="date" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" name="<?php echo esc_attr( $args->name ); ?>">
-					<option value="00"> <?php esc_html_e( 'Month', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'January', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'January', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'Febuary', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'Febuary', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'March', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'March', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'April', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'April', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'May', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'May', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'June', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'June', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'July', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'July', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'August', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'August', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'September', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'September', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'October', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'October', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'November', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'November', 'godaddy-email-marketing' ) ?> </option>
-					<option value="<?php esc_attr_e( 'December', 'godaddy-email-marketing' ) ?>"> <?php esc_html_e( 'December', 'godaddy-email-marketing' ) ?> </option>
+					<option value="00"> <?php esc_html_e( 'Month', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'January', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'January', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'Febuary', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'Febuary', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'March', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'March', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'April', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'April', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'May', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'May', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'June', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'June', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'July', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'July', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'August', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'August', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'September', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'September', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'October', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'October', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'November', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'November', 'madmimi-email-marketing' ) ?> </option>
+					<option value="<?php esc_attr_e( 'December', 'madmimi-email-marketing' ) ?>"> <?php esc_html_e( 'December', 'madmimi-email-marketing' ) ?> </option>
 				</select>
 			</span>
 			<span class="third">
 				<select fingerprint="date" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" name="<?php echo esc_attr( $args->name ); ?>">
-					<option value="00"> <?php esc_html_e( 'Day', 'godaddy-email-marketing' ) ?> </option>
+					<option value="00"> <?php esc_html_e( 'Day', 'madmimi-email-marketing' ) ?> </option>
 					<?php for ( $i = 1; $i < 32; $i++ ) : ?>
 						<option value="<?php echo strlen( $i ) < 2 ? '0'.$i : $i; ?>"> <?php echo esc_attr( $i ); ?> </option>
 					<?php endfor; ?>
@@ -330,7 +330,7 @@ class GEM_Form_Fields {
 			</span>
 			<span class="third">
 				<select fingerprint="date" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" name="<?php echo esc_attr( $args->name ); ?>">
-					<option value="00"> <?php esc_html_e( 'Year', 'godaddy-email-marketing' ) ?> </option>
+					<option value="00"> <?php esc_html_e( 'Year', 'madmimi-email-marketing' ) ?> </option>
 					<?php for ( $x = $current_year + 5 ; $x > $current_year - 81 ; $x-- ) : ?>
 						<option value="<?php echo absint( $x ); ?>"> <?php echo absint( $x ); ?> </option>
 					<?php endfor; ?>
@@ -348,21 +348,21 @@ class GEM_Form_Fields {
 	 * @param array $args Settings field arguments.
 	 */
 	public static function text_field( $args ) {
-		$field_classes = array( 'gem-field' );
+		$field_classes = array( 'mimi-field' );
 
 		// Is this field required?
 		if ( $args->required ) {
-			$field_classes[] = 'gem-required';
+			$field_classes[] = 'mimi-required';
 		}
 
-		$field_classes = (array) apply_filters( 'gem_required_field_class', $field_classes, $args );
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
 		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
 			<?php echo esc_html( $args->display ); ?>
 
-			<?php if ( $args->required && apply_filters( 'gem_required_field_indicator', true, $args ) ) : ?>
+			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 

@@ -2,7 +2,7 @@
 /**
  * Uninstall routine
  *
- * @package GEM
+ * @package Mad_Mimi
  */
 
 // @codeCoverageIgnoreStart
@@ -12,8 +12,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
 }
 
-// Delete all options and transients that contain gem.
-delete_option( 'gem-version' );
-delete_option( 'gem-settings' );
+// Delete all options and transients that contain mimi.
+delete_option( 'mimi-version' );
+delete_option( 'mimi-settings' );
 
 // @codeCoverageIgnoreEnd

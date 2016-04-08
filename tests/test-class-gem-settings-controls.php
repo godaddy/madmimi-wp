@@ -1,5 +1,5 @@
 <?php
-class Test_GEM_Settings_Controls extends WP_UnitTestCase {
+class Test_Mad_Mimi_Settings_Controls extends WP_UnitTestCase {
 
 	/**
 	 * PHP unit setup function
@@ -11,20 +11,20 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 	}
 
 	public function test_basics() {
-		$this->assertTrue( class_exists( 'GEM_Settings_Controls', false ) );
+		$this->assertTrue( class_exists( 'Mad_Mimi_Settings_Controls', false ) );
 	}
 
 	public function test_description() {
 		ob_start();
-		GEM_Settings_Controls::description();
+		Mad_Mimi_Settings_Controls::description();
 		$actual_output = ob_get_contents();
 		ob_end_clean();
-		$this->assertContains( '<p>Please enter your GoDaddy Email Marketing username and API Key in order to be able to create forms.</p>', $actual_output );
+		$this->assertContains( '<p>Please enter your Mad Mimi Sign Up Forms username and API Key in order to be able to create forms.</p>', $actual_output );
 	}
 
 	public function test_select() {
 		ob_start();
-		GEM_Settings_Controls::select( array(
+		Mad_Mimi_Settings_Controls::select( array(
 			'options' => array( 'key' => 'the_value' ),
 			'id' => 'the_id',
 			'page' => 'the_page',
@@ -38,7 +38,7 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 
 	public function test_select_is_empty() {
 		ob_start();
-		GEM_Settings_Controls::select( array(
+		Mad_Mimi_Settings_Controls::select( array(
 			'id' => null,
 		) );
 		$actual_output = ob_get_contents();
@@ -48,7 +48,7 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 
 	public function test_text() {
 		ob_start();
-		GEM_Settings_Controls::text(array(
+		Mad_Mimi_Settings_Controls::text(array(
 			'id' => 'the_id',
 			'page' => 'the_page',
 		) );
@@ -61,7 +61,7 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 
 	public function test_text_is_empty() {
 		ob_start();
-		GEM_Settings_Controls::text( array(
+		Mad_Mimi_Settings_Controls::text( array(
 			'id' => null,
 		) );
 		$actual_output = ob_get_contents();
@@ -71,7 +71,7 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 
 	public function test_checkbox() {
 		ob_start();
-		GEM_Settings_Controls::checkbox( array(
+		Mad_Mimi_Settings_Controls::checkbox( array(
 			'id' => 'the_id',
 			'page' => 'the_page',
 		) );
@@ -84,7 +84,7 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 
 	public function test_checkbox_is_empty() {
 		ob_start();
-		GEM_Settings_Controls::checkbox( array(
+		Mad_Mimi_Settings_Controls::checkbox( array(
 			'id' => null,
 		) );
 		$actual_output = ob_get_contents();
@@ -94,7 +94,7 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 
 	public function test_show_description() {
 		ob_start();
-		GEM_Settings_Controls::show_description( array(
+		Mad_Mimi_Settings_Controls::show_description( array(
 			'description' => 'the_description',
 		) );
 		$actual_output = ob_get_contents();
@@ -103,9 +103,9 @@ class Test_GEM_Settings_Controls extends WP_UnitTestCase {
 	}
 
 	public function test_get_option() {
-		update_option( 'gem-settings', array( 'username' => 'user_name', 'api-key' => '1234' ) );
-		$this->assertFalse( GEM_Settings_Controls::get_option( 'error' ) );
-		$this->assertEquals( 'user_name', GEM_Settings_Controls::get_option( 'username' ) );
-		$this->assertEquals( '1234', GEM_Settings_Controls::get_option( 'api-key' ) );
+		update_option( 'mimi-settings', array( 'username' => 'user_name', 'api-key' => '1234' ) );
+		$this->assertFalse( Mad_Mimi_Settings_Controls::get_option( 'error' ) );
+		$this->assertEquals( 'user_name', Mad_Mimi_Settings_Controls::get_option( 'username' ) );
+		$this->assertEquals( '1234', Mad_Mimi_Settings_Controls::get_option( 'api-key' ) );
 	}
 }
