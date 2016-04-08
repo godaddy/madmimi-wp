@@ -1,7 +1,19 @@
 <?php
+/**
+ * Uninstall routine
+ *
+ * @package GEM
+ */
 
-// if uninstall not called from WordPress exit
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
+// @codeCoverageIgnoreStart
+
+// If uninstall not called from WordPress exit.
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
+}
 
-// silence is golden.
+// Delete all options and transients that contain gem.
+delete_option( 'gem-version' );
+delete_option( 'gem-settings' );
+
+// @codeCoverageIgnoreEnd
