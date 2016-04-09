@@ -141,17 +141,22 @@ if [ $# -eq 0 ]; then
 	echo ">> replacer <<";
 	echo "By marcin-lawrowski (https://github.com/marcin-lawrowski)";
 	echo "";
-	echo "Usage: $0 path [disable-dry-run]";
+	echo "Usage: $0 path [mode]";
 	echo "";
-	echo "path              = Existing directory to perform strings replacements on";
-	echo "[disable-dry-run] = Use 1 value if you want to disable dry run mode";
+	echo "path   = Existing directory to perform strings replacements on";
+	echo "[mode] = Use: '1' value if you want to do both replacements and files renaming, '2' value you want to do just replacements, '3' value you want to do just files renaming";
 	echo "";
 	exit 1;
 fi
 
-ALLOWED_FILES_MASK="(\.php)|(\.css)|(\.js)|(\.txt)|(\.md)|(\.pot)"
+ALLOWED_FILES_MASK="(\.php)|(\.css)|(\.js)|(\.txt)|(\.md)|(\.pot)|(\.po)"
 targetPath=$1
-saveChanges=$2
+mode=$2
+saveChanges='0'
+
+if [[ $mode -gt 0 ]]; then
+	saveChanges=1
+fi
 
 if [ ! -d "$targetPath" ]; then
 	echo "$targetPath directory does not exist"
@@ -166,15 +171,19 @@ fi
 
 for sourceFile in $(find "$targetPath" -not \( -path "$targetPath/dev-lib/*" -o -path "$targetPath/.git/*" \)); do
 	if [ -f "$sourceFile" ]; then
-		replaceAllOccurrences $sourceFile "GoDaddy Email Marketing" "Mad Mimi Sign Up Forms" "$ALLOWED_FILES_MASK$" $saveChanges
-		replaceAllOccurrences $sourceFile "gem" "mimi" "$ALLOWED_FILES_MASK$" $saveChanges
-		replaceAllOccurrences $sourceFile "GEM" "Mad_Mimi" "$ALLOWED_FILES_MASK$" $saveChanges
-		replaceAllOccurrences $sourceFile "wp-godaddy-email-marketing" "madmimi-wp" "$ALLOWED_FILES_MASK$" $saveChanges
-		replaceAllOccurrences $sourceFile "godaddy" "madmimi" "$ALLOWED_FILES_MASK$" $saveChanges
-		replaceAllOccurrences $sourceFile "GoDaddy" "Mad Mimi" "$ALLOWED_FILES_MASK$" $saveChanges
+		if [[ $mode -eq '' || $mode -eq 1 || $mode -eq 2 ]]; then
+			replaceAllOccurrences $sourceFile "GoDaddy Email Marketing" "Mad Mimi Sign Up Forms" "$ALLOWED_FILES_MASK$" $saveChanges
+			replaceAllOccurrences $sourceFile "gem" "mimi" "$ALLOWED_FILES_MASK$" $saveChanges
+			replaceAllOccurrences $sourceFile "GEM" "Mad_Mimi" "$ALLOWED_FILES_MASK$" $saveChanges
+			replaceAllOccurrences $sourceFile "wp-godaddy-email-marketing" "madmimi-wp" "$ALLOWED_FILES_MASK$" $saveChanges
+			replaceAllOccurrences $sourceFile "godaddy" "madmimi" "$ALLOWED_FILES_MASK$" $saveChanges
+			replaceAllOccurrences $sourceFile "GoDaddy" "Mad Mimi" "$ALLOWED_FILES_MASK$" $saveChanges
+		fi
 		
-		renameFile $sourceFile "gem" "mimi" $saveChanges
-		renameFile $sourceFile "godaddy" "madmimi" $saveChanges
+		if [[ $mode -eq '' || $mode -eq 1 || $mode -eq 3 ]]; then
+			renameFile $sourceFile "gem" "mimi" $saveChanges
+			renameFile $sourceFile "godaddy" "madmimi" $saveChanges
+		fi
 	fi
 done
 
