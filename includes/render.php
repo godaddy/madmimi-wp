@@ -56,7 +56,7 @@ class Mad_Mimi_Form_Renderer {
 					if ( $show_powered_by ) : ?>
 
 						<p>
-							<a href="https://www.madmimi.com/business/email-marketing/" target="_blank"><?php esc_html_e( 'Powered by Mad Mimi', 'madmimi-email-marketing' ); ?></a>
+							<a href="https://www.madmimi.com/" target="_blank"><?php esc_html_e( 'Powered by Mad Mimi', 'madmimi-email-marketing' ); ?></a>
 						</p>
 
 					<?php endif; ?>

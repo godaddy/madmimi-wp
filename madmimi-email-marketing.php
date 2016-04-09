@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Mad Mimi Sign Up Forms Signup Forms
- * Plugin URI: https://mimi.madmimi.com/
- * Description: Add the Mad Mimi Sign Up Forms signup form to your WordPress site! Easy to set up, the plugin allows your site visitors to subscribe to your email lists.
- * Version: 1.0.4
- * Author: Mad Mimi
- * Author URI: https://mimi.madmimi.com/
+ * Plugin Name: Mad Mimi Sign Up Forms
+ * Plugin URI: https://wordpress.org/plugins/mad-mimi-sign-up-forms/
+ * Description: Add the Mad Mimi signup form to your WordPress site! Easy to set up, the plugin allows your site visitors to subscribe to your email lists.
+ * Version: 1.6
+ * Author: Mad Mimi, LLC
+ * Author URI: http://madmimi.com/
  * Text Domain: madmimi-email-marketing
  * Domain Path: /languages
  *
@@ -41,6 +41,13 @@ class Mad_Mimi_Official {
 	 * @var Mad_Mimi_Settings
 	 */
 	public $settings;
+
+	/**
+	 * Mad_Mimi_Shortcode instance.
+	 *
+	 * @var Mad_Mimi_Shortcode
+	 */
+	public $shortcode;
 
 	/**
 	 * Turns on debugging.
@@ -103,7 +110,7 @@ class Mad_Mimi_Official {
 
 		// Plugin's main directory.
 		defined( 'Mad_Mimi_VERSION' )
-			or define( 'Mad_Mimi_VERSION', '1.0.4' );
+			or define( 'Mad_Mimi_VERSION', '1.6' );
 
 		// Set up the base name.
 		isset( self::$basename ) || self::$basename = plugin_basename( __FILE__ );
@@ -163,8 +170,9 @@ class Mad_Mimi_Official {
 	public function register_shortcode() {
 
 		// Register shortcode.
-		add_shortcode( 'mimi', array( 'Mad_Mimi_Shortcode', 'render' ) );
-		add_shortcode( 'Mad_Mimi', array( 'Mad_Mimi_Shortcode', 'render' ) );
+		$this->shortcode = new Mad_Mimi_Shortcode();
+		add_shortcode( 'mimi', array( $this->shortcode, 'render' ) );
+		add_shortcode( 'Mad_Mimi', array( $this->shortcode, 'render' ) );
 	}
 
 	/**

@@ -42,6 +42,6 @@ class Mad_Mimi_Shortcode {
 function mimi_form( $id, $echo = true ) {
 	if ( class_exists( 'Mad_Mimi_Form_Renderer', false ) ) {
 		$renderer = new Mad_Mimi_Form_Renderer();
-		$renderer->process( $id, $echo );
+		return $renderer->process( $id, $echo );
 	}
 }

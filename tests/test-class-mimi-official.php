@@ -91,8 +91,8 @@ class Test_Mad_Mimi_Official extends WP_UnitTestCase {
 		$this->assertArrayHasKey( 'mimi', $shortcode_tags );
 		$this->assertArrayHasKey( 'Mad_Mimi', $shortcode_tags );
 
-		$this->assertEquals( $shortcode_tags['mimi'], array( 'Mad_Mimi_Shortcode', 'render' ) );
-		$this->assertEquals( $shortcode_tags['Mad_Mimi'], array( 'Mad_Mimi_Shortcode', 'render' ) );
+		$this->assertEquals( $shortcode_tags['mimi'], array( $this->instance->shortcode, 'render' ) );
+		$this->assertEquals( $shortcode_tags['Mad_Mimi'], array( $this->instance->shortcode, 'render' ) );
 		$this->assertTrue( has_shortcode( 'This is a blob with [mimi id=123] in it', 'mimi' ) );
 		$this->assertTrue( has_shortcode( 'This is a blob with [Mad_Mimi] in it', 'Mad_Mimi' ) );
 	}

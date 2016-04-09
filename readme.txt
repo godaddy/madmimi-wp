@@ -1,9 +1,9 @@
 === Mad Mimi Sign Up Forms ===
-Contributors: madmimi, madmimi, humanmade, valendesigns, lukecarbis, marcin.lawrowski, xwp
+Contributors: godaddy, madmimi, humanmade, valendesigns, lukecarbis, marcin.lawrowski, xwp
 Tags: forms, newsletter, opt-in, email marketing, signup, subscribe
 Requires at least: 3.8
 Tested up to: 4.5
-Stable tag: 1.0.4
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,11 +11,11 @@ Add the Mad Mimi Sign Up Forms plugin to your WordPress site! Easy to set up, th
 
 == Description ==
 
-The Mad Mimi Sign Up Forms signup form plugin makes it easy to grow your subscribers! Use this plugin to integrate your signup forms into your WordPress site. To learn more, [pick up a Mad Mimi Sign Up Forms account](https://www.madmimi.com/business/email-marketing) and explore.
+The Mad Mimi Sign Up Forms signup form plugin makes it easy to grow your subscribers! Use this plugin to integrate your signup forms into your WordPress site. To learn more, [pick up a Mad Mimi Sign Up Forms account](https://www.madmimi.com/) and explore.
 
 Once the plugin is activated, you can select and insert any of your Mad Mimi Sign Up Forms signup forms right into your site by using a widget, shortcode, or template tag. Setup is easy; in the plugin Settings, simply enter your account email address and API key (found in the Settings section of your Mad Mimi Sign Up Forms account), and you're all set.
 
-**Official Mad Mimi Sign Up Forms Signup Forms plugin features:**
+**Official Mad Mimi Sign Up Forms plugin features:**
 
 * Automatically add new forms for users to sign up to an email list of your choice
 * Insert unlimited signup forms using the widget, shortcode, or template tag
@@ -45,7 +45,7 @@ Mad Mimi Sign Up Forms is the easiest way to create, send, share, and track emai
 
 = Do I need a Mad Mimi Sign Up Forms account to use this plugin? =
 
-Yes, this plugin requires a [Mad Mimi Sign Up Forms](https://www.madmimi.com/business/email-marketing) account.
+Yes, this plugin requires a [Mad Mimi Sign Up Forms](https://www.madmimi.com/) account.
 
 = Is there a widget? =
 

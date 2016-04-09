@@ -175,7 +175,7 @@ class Mad_Mimi_Settings {
 				esc_html__( 'Instructions', 'madmimi-email-marketing' ),
 				sprintf(
 					esc_html__( 'Once the plugin is activated, you will be able to select and insert any of your Mad Mimi Sign Up Forms webforms right into your site. Setup is easy. Below, simply enter your account email address and API key (found in your Mad Mimi Sign Up Forms account [%s] area). Here are the 3 ways you can display a webform on your site:', 'madmimi-email-marketing' ),
-					'<a href="https://mimi.madmimi.com/user/edit" target="_blank">https://mimi.madmimi.com/user/edit</a>'
+					'<a href="https://madmimi.com/user/edit" target="_blank">https://madmimi.com/user/edit</a>'
 				),
 				__( '<strong>Widget:</strong> Go to Appearance &rarr; widgets and find the widget called “Mad Mimi Sign Up Forms Form” and drag it into the widget area of your choice. You can then add a title and select a form!', 'madmimi-email-marketing' ),
 				__( '<strong>Shortcode:</strong> You can add a form to any post or page by adding the shortcode (ex. <code>[mimi id=80326]</code>) in the page/post editor.', 'madmimi-email-marketing' ),
@@ -189,7 +189,7 @@ class Mad_Mimi_Settings {
 
 		$screen->set_help_sidebar(
 			sprintf(
-				'<p><strong>%s</strong></p><p><a href="https://madmimi.com" target="_blank">%s</a></p><p><a href="https://support.madmimi.com/" target="_blank">%s</a></p><p><a href="https://support.madmimi.com/" target="_blank" class="button">%s</a></p>',
+				'<p><strong>%s</strong></p><p><a href="https://madmimi.com" target="_blank">%s</a></p><p><a href="https://help.madmimi.com/" target="_blank">%s</a></p><p><a href="https://help.madmimi.com/" target="_blank" class="button">%s</a></p>',
 				esc_html__( 'For more information:', 'madmimi-email-marketing' ),
 				esc_html__( 'Mad Mimi', 'madmimi-email-marketing' ),
 				esc_html__( 'Mad Mimi Help', 'madmimi-email-marketing' ),
@@ -247,7 +247,7 @@ class Mad_Mimi_Settings {
 			array(
 				'id' => 'api-key',
 				'page' => $this->slug,
-				'description' => sprintf( '<a target="_blank" href="%s">%s</a>', 'https://www.madmimi.com/help/find-api-key-15909', _x( 'Where can I find my API key?', 'settings page', 'madmimi-email-marketing' ) ),
+				'description' => sprintf( '<a target="_blank" href="%s">%s</a>', 'https://madmimi.com/developer', _x( 'Where can I find my API key?', 'settings page', 'madmimi-email-marketing' ) ),
 				'label_for' => $this->slug . '-api-key',
 			)
 		);
@@ -290,7 +290,7 @@ class Mad_Mimi_Settings {
 					<h3><?php echo esc_html_x( 'Enjoy the Mad Mimi Sign Up Forms Experience, first hand.', 'mimi header note', 'madmimi-email-marketing' ); ?></h3>
 
 					<p><?php echo esc_html_x( 'Add your Mad Mimi Sign Up Forms webform to your WordPress site! Easy to set up, the Mad Mimi Sign Up Forms plugin allows your site visitors to subscribe to your email list.', 'header note', 'madmimi-email-marketing' ); ?></p>
-					<p class="description"><?php echo sprintf( esc_html_x( 'Don\'t have a Mad Mimi Sign Up Forms account? Get one in less than 2 minutes! %s', 'header note', 'madmimi-email-marketing' ), sprintf( '<a target="_blank" href="https://madmimi.com/business/email-marketing" class="button">%s</a>', esc_html_x( 'Sign Up Now', 'header note', 'madmimi-email-marketing' ) ) ); ?></p>
+					<p class="description"><?php echo sprintf( esc_html_x( 'Don\'t have a Mad Mimi Sign Up Forms account? Get one in less than 2 minutes! %s', 'header note', 'madmimi-email-marketing' ), sprintf( '<a target="_blank" href="https://madmimi.com/" class="button">%s</a>', esc_html_x( 'Sign Up Now', 'header note', 'madmimi-email-marketing' ) ) ); ?></p>
 
 				</div>
 
