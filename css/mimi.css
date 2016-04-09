@@ -16,12 +16,16 @@ input.mimi-invalid {
 	display: block;
 }
 
+form.mimi-form label {
+	display: inline !important;
+}
+
 .mimi-spinner {
 	display: none;
-	background: url(../../../../wp-admin/images/wpspin_light.gif) no-repeat;
-	background-size: 16px 16px;
-	width: 16px;
-	height: 16px;
+	background: url( '../images/spinner.gif' ) no-repeat;
+	background-size: 20px 20px;
+	width: 20px;
+	height: 20px;
 }
 
 .mimi-submit {
@@ -49,6 +53,6 @@ input.mimi-invalid {
   (min-resolution: 120dpi) {
 
 	.mimi-spinner {
-		background-image: url(../../../../wp-admin/images/wpspin_light-2x.gif);
+		background-image: url( '../images/spinner-2x.gif' );
 	}
 }
