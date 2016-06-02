@@ -8,6 +8,10 @@ form.mimi-form p {
 	padding: 0;
 }
 
+form.mimi-form select {
+	font-size: 1.6rem;
+}
+
 input.mimi-invalid {
 	border: 1px solid red;
 }
@@ -18,10 +22,10 @@ input.mimi-invalid {
 
 .mimi-spinner {
 	display: none;
-	background: url(../../../../wp-admin/images/wpspin_light.gif) no-repeat;
-	background-size: 16px 16px;
-	width: 16px;
-	height: 16px;
+	background: url( '../images/spinner.gif' ) no-repeat;
+	background-size: 20px 20px;
+	width: 20px;
+	height: 20px;
 }
 
 .mimi-submit {
@@ -39,6 +43,11 @@ input.mimi-invalid {
 	border-radius: 3px;
 }
 
+@media only screen and (max-width: 279px) {
+	form.mimi-form select {
+		margin-top: 5px;
+	}
+}
 
 /**
  * HiDPI Displays
@@ -49,6 +58,6 @@ input.mimi-invalid {
   (min-resolution: 120dpi) {
 
 	.mimi-spinner {
-		background-image: url(../../../../wp-admin/images/wpspin_light-2x.gif);
+		background-image: url( '../images/spinner-2x.gif' );
 	}
 }
