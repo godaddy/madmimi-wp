@@ -24,6 +24,15 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 
 		extract( $args );
 
+		// Set the initial form ID value if one exists.
+		if ( empty( $instance['form'] ) ) {
+			$forms = Mad_Mimi_Dispatcher::get_forms();
+
+			if ( ! empty( $forms->signups ) ) {
+				$instance['form'] = $forms->signups[0]->id;
+			}
+		}
+
 		$title   = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Mad Mimi Form', 'mimi' ) : $instance['title'], $instance, $this->id_base );
 		$text    = empty( $instance['text'] ) ? '' : $instance['text'];
 		$form_id = empty( $instance['form'] ) ? false : $instance['form'];

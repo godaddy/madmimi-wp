@@ -4,7 +4,7 @@ class Mad_Mimi_Form_Renderer {
 
 	private static $loops = 0;
 
-	public function process( $form_id, $echo = false ) {
+	public static function process( $form_id, $echo = false ) {
 
 		$form = Mad_Mimi_Dispatcher::get_fields( (int) $form_id );
 
@@ -59,7 +59,7 @@ class Mad_Mimi_Form_Fields {
 
 	private static $cycle = 0;
 
-	public function dispatch_field( $field, $cycle = 1 ) {
+	public static function dispatch_field( $field, $cycle = 1 ) {
 
 		if ( ! is_object( $field ) || ! method_exists( __CLASS__, $field->type ) ) {
 			return;
@@ -78,7 +78,7 @@ class Mad_Mimi_Form_Fields {
 
 	}
 
-	public function get_form_id( $field_name ) {
+	public static function get_form_id( $field_name ) {
 
 		// since HTML ID's can't exist in the same exact spelling more than once... make it special.
 		return sprintf( 'form_%s_%s', self::$cycle, $field_name );
