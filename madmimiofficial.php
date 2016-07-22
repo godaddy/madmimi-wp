@@ -1,28 +1,15 @@
 <?php
-
-/*
-Plugin Name: Official Mad Mimi Signup Forms
-Plugin URI: https://wordpress.org/plugins/mad-mimi-sign-up-forms/
-Description: Add the Mad Mimi webform to your WordPress site! Easy to set up, the Mad Mimi plugin allows your site visitors to subscribe to your email lists.
-Author: Mad Mimi, LLC
-Version: 1.5
-Author URI: http://madmimi.com/
-License: GPLv2 or later
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+/**
+ * Plugin Name: Official Mad Mimi Signup Forms
+ * Plugin URI: https://wordpress.org/plugins/mad-mimi-sign-up-forms/
+ * Description: Add the Mad Mimi webform to your WordPress site! Easy to set up, the Mad Mimi plugin allows your site visitors to subscribe to your email lists.
+ * Author: Mad Mimi, LLC
+ * Version: 1.5.1
+ * Author URI: https://madmimi.com/
+ * License: GPL-2.0
+ *
+ * Copyright © 2016 Mad Mimi, LLC. All Rights Reserved.
+ */
 
 class MadMimi_Official {
 
@@ -72,9 +59,9 @@ class MadMimi_Official {
 		defined( 'MADMIMI_PLUGIN_BASE' )
 			or define( 'MADMIMI_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 
-		// Plugin's main directory
+		// Plugin version
 		defined( 'MADMIMI_VERSION' )
-			or define( 'MADMIMI_VERSION', '1.1' );
+			or define( 'MADMIMI_VERSION', '1.5.1' );
 
 		// Set up the base name
 		isset( self::$basename ) || self::$basename = plugin_basename( __FILE__ );
