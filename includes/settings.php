@@ -441,7 +441,7 @@ final class Mad_Mimi_Settings_Controls {
 
 	}
 
-	public function show_description( $field_args ) {
+	public static function show_description( $field_args ) {
 
 		if ( isset( $field_args['description'] ) ) : ?>
 
