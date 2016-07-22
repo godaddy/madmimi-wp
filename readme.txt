@@ -64,9 +64,9 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 == Screenshots ==
 
 1. Settings screen.
-2. A full list of your Mad Mimi Webforms, with ready shortcodes
-3. The widget, on the front-end
-4. The widget, on the widgets page
+2. A full list of your Mad Mimi forms, with handy shortcodes.
+3. The widget on the front-end.
+4. The widget on the widgets page.
 
 == Changelog ==
 
