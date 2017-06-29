@@ -4,15 +4,15 @@ class Mad_Mimi_Shortcode {
 
 	public function render( $atts ) {
 
-		extract( shortcode_atts( array(
+		$atts = shortcode_atts( array(
 			'id' => false,
-		), $atts ) );
+		), $atts );
 
-		if ( ! $id ) {
+		if ( ! $atts['id'] ) {
 			return;
 		}
 
-		return Mad_Mimi_Form_Renderer::process( $id, false );
+		return Mad_Mimi_Form_Renderer::process( $atts['id'], false );
 
 	}
 }
