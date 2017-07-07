@@ -221,7 +221,9 @@ module.exports = function( grunt ) {
 					    section = matches[0];
 
 					for ( var i = 0; i < tags.length; i++ ) {
-						section = section.replace( tags[i], '[' + tags[i] + '](https://wordpress.org/plugins/tags/' + tags[i] + '/)' );
+
+						section = section.replace( tags[i], '[' + tags[i] + '](https://wordpress.org/plugins/tags/' + tags[i].replace( ' ', '-' ) + '/)' );
+
 					}
 
 					// Banner
