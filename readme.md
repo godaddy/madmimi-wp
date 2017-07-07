@@ -11,7 +11,7 @@
 
 Add the Mad Mimi webform to your WordPress site! Easy to set up, the Mad Mimi plugin allows your site visitors to subscribe to your email lists.
 
-[![Build Status](https://travis-ci.org/madmimi/madmimi-wp.svg?branch=master)](https://travis-ci.org/madmimi/madmimi-wp) [![devDependencies Status](https://david-dm.org/madmimi/madmimi-wp/master/dev-status.svg)](https://david-dm.org/madmimi/madmimi-wp/master?type=dev) [![License](https://img.shields.io/badge/license-GPL--2.0-brightgreen.svg)](https://github.com/madmimi/madmimi-wp/blob/master/license.txt) [![PHP >= 5.4](https://img.shields.io/badge/php->= 5.4-8892bf.svg)](https://secure.php.net/supported-versions.php) [![WordPress >= 4.4](https://img.shields.io/badge/wordpress->= 4.4-blue.svg)](https://wordpress.org/download/release-archive/)  
+[![Build Status](https://travis-ci.org/madmimi/madmimi-wp.svg?branch=master)](https://travis-ci.org/madmimi/madmimi-wp) [![devDependencies Status](https://david-dm.org/madmimi/madmimi-wp/master/dev-status.svg)](https://david-dm.org/madmimi/madmimi-wp/master?type=dev) [![License](https://img.shields.io/badge/license-GPL--2.0-brightgreen.svg)](https://github.com/madmimi/madmimi-wp/blob/master/license.txt) [![PHP >= 5.4](https://img.shields.io/badge/php-%3E=%205.4-8892bf.svg)](https://secure.php.net/supported-versions.php) [![WordPress >= 4.4](https://img.shields.io/badge/wordpress-%3E=%204.4-blue.svg)](https://wordpress.org/download/release-archive/)  
 
 ## Description ##
 
