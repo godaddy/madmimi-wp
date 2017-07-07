@@ -8,7 +8,7 @@ class Mad_Mimi_Shortcode {
 			'id' => false,
 		), $atts );
 
-		if ( ! $atts['id'] ) {
+		if ( empty( $atts['id'] ) ) {
 
 			return;
 

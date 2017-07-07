@@ -46,11 +46,15 @@ class Mad_Mimi_Settings {
 				case 'debug-reset' :
 
 					if ( ! $this->mimi->debug ) {
+
 						return;
+
 					}
 
 					if ( isset( $settings['username'] ) ) {
+
 						delete_transient( 'mimi-' . $settings['username'] . '-lists' );
+
 					}
 
 					delete_option( $this->slug );
@@ -185,9 +189,9 @@ class Mad_Mimi_Settings {
 
 		$screen->set_help_sidebar( sprintf(
 			'<p><strong>%1$s</strong></p>
-			<p><a href="http://madmimi.com" target="_blank">%2$s</a></p>
-			<p><a href="http://help.madmimi.com" target="_blank">%3$s</a></p>
-			<p><a href="http://blog.madmimi.com" target="_blank">%4$s</a></p>
+			<p><a href="https://madmimi.com" target="_blank">%2$s</a></p>
+			<p><a href="https://help.madmimi.com" target="_blank">%3$s</a></p>
+			<p><a href="https://blog.madmimi.com" target="_blank">%4$s</a></p>
 			<p><a href="mailto:support@madmimi.com" target="_blank">%5$s</a></p>',
 			esc_html( 'For more information:', 'mad-mimi-sign-up-forms' ),
 			esc_html( 'Mad Mimi' ),
@@ -294,7 +298,7 @@ class Mad_Mimi_Settings {
 								/* translators: 1. Link to the Mad Mimi account signup. */
 								esc_html__( "Don't have a Mad Mimi account? Get one in less than 2 minutes! %s", 'mad-mimi-sign-up-forms' ),
 								sprintf(
-									'<a target="_blank" href="http://madmimi.com" class="button">%s</a>',
+									'<a target="_blank" href="https://madmimi.com" class="button">%s</a>',
 									esc_html__( 'Sign Up Now', 'mad-mimi-sign-up-forms' )
 								)
 							);

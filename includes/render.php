@@ -16,7 +16,7 @@ class Mad_Mimi_Form_Renderer {
 
 			?>
 
-			<div class="mimi-form-wrapper" id="form-<?php echo absint( $form_id ); ?>">
+			<div class="mimi-form-wrapper" id="form-<?php echo esc_attr( absint( $form_id ) ); ?>">
 				<form action="<?php echo esc_url( $form->submit ); ?>" method="post" class="mimi-form">
 
 					<?php do_action( 'mimi_before_fields', $form_id, $form->fields ); ?>
@@ -34,12 +34,12 @@ class Mad_Mimi_Form_Renderer {
 					if ( $show_powered_by ) : ?>
 
 						<p>
-							<a href="http://madmimi.com" target="_blank"><?php esc_html_e( 'Powered by Mad Mimi', 'mad-mimi-sign-up-forms' ); ?></a>
+							<a href="https://madmimi.com" target="_blank"><?php esc_html_e( 'Powered by Mad Mimi', 'mad-mimi-sign-up-forms' ); ?></a>
 						</p>
 
 					<?php endif; ?>
 
-					<input type="hidden" name="form_id" value="<?php echo absint( $form->id ); ?>" />
+					<input type="hidden" name="form_id" value="<?php echo esc_attr( absint( $form->id ) ); ?>" />
 					<input type="submit" value="<?php echo esc_attr( $form->button_text ); ?>" class="button mimi-submit" />
 
 					<span class="mimi-spinner"></span>
@@ -174,7 +174,9 @@ class Mad_Mimi_Form_Fields {
 			<?php echo esc_html( $args->display ); ?>
 
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
+
 				<span class="required">*</span>
+
 			<?php endif; ?>
 
 		</label>
@@ -220,8 +222,11 @@ class Mad_Mimi_Form_Fields {
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
 			<?php echo esc_html( $args->display ); ?>
+
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
+
 				<span class="required">*</span>
+
 			<?php endif; ?>
 
 		</label>
@@ -250,7 +255,11 @@ class Mad_Mimi_Form_Fields {
 
 			<option value="<?php echo esc_attr( $dropdown_options ); ?>"> <?php echo $dropdown_options; // xss ok. ?><br>
 
-		<?php } ?>
+		<?php
+
+		}
+
+		?>
 
 		</select>
 
@@ -375,7 +384,9 @@ class Mad_Mimi_Form_Fields {
 
 		<input type="hidden" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" name="<?php echo esc_attr( $args->name ); ?>" value="">
 
-	<?php }
+	<?php
+
+	}
 
 	public static function text_field( $args ) {
 
@@ -405,6 +416,7 @@ class Mad_Mimi_Form_Fields {
 		<input type="text" name="<?php echo esc_attr( $args->name ); ?>" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" class="<?php echo esc_attr( join( ' ', $field_classes ) ); ?>" />
 
 		<?php
+
 	}
 
 }

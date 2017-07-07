@@ -5,7 +5,7 @@ class Mad_Mimi_Dispatcher {
 	/**
 	 * API's base URL
 	 */
-	const BASE_API = 'http://madmimi.com/';
+	const BASE_API = 'https://madmimi.com/';
 
 	private static $ok_codes = array( 200, 304 );
 
@@ -30,7 +30,7 @@ class Mad_Mimi_Dispatcher {
 		) );
 
 		// delete all existing transients for this user
-		delete_transient( 'mimi-' . $username . '-lists' );
+		delete_transient( "mimi-{$username}-lists" );
 
 		// credentials are incorrect
 		if ( ! in_array( wp_remote_retrieve_response_code( $response ), self::$ok_codes, true ) ) {
@@ -60,9 +60,9 @@ class Mad_Mimi_Dispatcher {
 
 		}
 
-		$data = get_transient( 'mimi-' . $username . '-lists' );
+		$data = get_transient( "mimi-{$username}-lists" );
 
-		if ( false === ( $data ) ) {
+		if ( false === $data ) {
 
 			$data = self::fetch_forms( $username );
 
@@ -74,9 +74,9 @@ class Mad_Mimi_Dispatcher {
 
 	public static function get_fields( $form_id ) {
 
-		$fields = get_transient( 'mimi-form-' . $form_id );
+		$fields = get_transient( "mimi-form-{$form_id}" );
 
-		if ( false === ( $fields ) ) {
+		if ( false === $fields ) {
 
 			// fields are not cached. fetch and cache.
 			$fields = wp_remote_get( self::get_method_url( 'fields', array(
@@ -93,7 +93,7 @@ class Mad_Mimi_Dispatcher {
 			$fields = json_decode( wp_remote_retrieve_body( $fields ) );
 
 			// @TODO: should we cache results for longer than a day? not expire at all?
-			set_transient( 'mimi-form-' . $form_id, $fields );
+			set_transient( "mimi-form-{$form_id}", $fields );
 
 		}
 
@@ -112,7 +112,7 @@ class Mad_Mimi_Dispatcher {
 
 		}
 
-		$data = get_transient( 'mimi-' . $username . '-account' );
+		$data = get_transient( "mimi-{$username}-account" );
 
 		if ( false === $data ) {
 
@@ -129,7 +129,7 @@ class Mad_Mimi_Dispatcher {
 			$data = $data->result;
 
 			// no need to expire at all
-			set_transient( 'mimi-' . $username . '-account', $data );
+			set_transient( "mimi-{$username}-account", $data );
 
 		}
 
@@ -186,7 +186,7 @@ class Mad_Mimi_Dispatcher {
 
 			case 'fields' :
 
-				$path = add_query_arg( $auth, 'signups/' . $params['id'] . '.json' );
+				$path = add_query_arg( $auth, "signups/{$params['id']}.json" );
 
 				break;
 
