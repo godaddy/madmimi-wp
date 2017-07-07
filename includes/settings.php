@@ -30,7 +30,7 @@ class Mad_Mimi_Settings {
 			array( &$this, 'display_settings_page' )  // callback
 		);
 
-		add_action( 'load-' . $this->hook, array( $this, 'page_load' ) );
+		add_action( "load-{$this->hook}", array( $this, 'page_load' ) );
 
 	}
 
@@ -60,7 +60,9 @@ class Mad_Mimi_Settings {
 				case 'debug-reset-transients' :
 
 					if ( ! $this->mimi->debug ) {
+
 						return;
+
 					}
 
 					if ( isset( $settings['username'] ) ) {
@@ -70,7 +72,9 @@ class Mad_Mimi_Settings {
 
 						// mass-removal of all forms
 						foreach ( Mad_Mimi_Dispatcher::get_forms()->signups as $form ) {
+
 							delete_transient( 'mimi-form-' . $form->id );
+
 						}
 
 						add_settings_error( $this->slug, 'mimi-reset', __( 'All transients were removed.', 'mad-mimi-sign-up-forms' ), 'updated' );
@@ -84,13 +88,17 @@ class Mad_Mimi_Settings {
 					if ( isset( $settings['username'] ) ) {
 
 						if ( delete_transient( 'mimi-' . $settings['username'] . '-lists' ) ) {
+
 							add_settings_error( $this->slug, 'mimi-reset', __( 'Forms list was successfully updated.', 'mad-mimi-sign-up-forms' ), 'updated' );
+
 						}
 
 					}
 
 					foreach ( (array) Mad_Mimi_Dispatcher::get_forms()->signups as $form ) {
-						delete_transient( 'mimi-form-' . $form->id );
+
+						delete_transient( "mimi-form-{$form->id}" );
+
 					}
 
 					break;
@@ -98,7 +106,9 @@ class Mad_Mimi_Settings {
 				case 'edit_form' :
 
 					if ( ! isset( $_GET['form_id'] ) ) { // @codingStandardsIgnoreLine
+
 						return;
+
 					}
 
 					$tokenized_url = add_query_arg( 'redirect', sprintf( '/signups/%d/edit', absint( $_GET['form_id'] ) ), Mad_Mimi_Dispatcher::user_sign_in() ); // @codingStandardsIgnoreLine
@@ -113,7 +123,9 @@ class Mad_Mimi_Settings {
 					$user_id = get_current_user_id();
 
 					if ( ! $user_id ) {
+
 						return;
+
 					}
 
 					update_user_meta( $user_id, 'madmimi-dismiss', 'show' );
@@ -192,10 +204,12 @@ class Mad_Mimi_Settings {
 
 		// If no options exist, create them.
 		if ( ! get_option( $this->slug ) ) {
+
 			update_option( $this->slug, apply_filters( 'mimi_default_options', array(
 				'username' => '',
 				'api-key'  => '',
 			) ) );
+
 		}
 
 		register_setting( 'madmimi-options', $this->slug, array( $this, 'validate' ) );
@@ -203,36 +217,39 @@ class Mad_Mimi_Settings {
 		// First, we register a section. This is necessary since all future options must belong to a
 		add_settings_section(
 			'general_settings_section',
-			__( 'Account Details', 'mad-mimi-sign-up-forms' ),
+			esc_html__( 'Account Details', 'mad-mimi-sign-up-forms' ),
 			array( 'Mad_Mimi_Settings_Controls', 'description' ),
 			$this->slug
 		);
 
 		add_settings_field(
 			'username',
-			__( 'Mad Mimi Username', 'mad-mimi-sign-up-forms' ),
+			esc_html__( 'Mad Mimi Username', 'mad-mimi-sign-up-forms' ),
 			array( 'Mad_Mimi_Settings_Controls', 'text' ),
 			$this->slug,
 			'general_settings_section',
 			array(
-				'id' => 'username',
-				'page' => $this->slug,
-				'description' => __( 'Your Mad Mimi username (email address)', 'mad-mimi-sign-up-forms' ),
-				'label_for' => $this->slug . '-username',
+				'id'          => 'username',
+				'page'        => $this->slug,
+				'description' => esc_html__( 'Your Mad Mimi username (email address)', 'mad-mimi-sign-up-forms' ),
+				'label_for'   => "{$this->slug}-username",
 			)
 		);
 
 		add_settings_field(
 			'api-key',
-			__( 'Mad Mimi API Key', 'mad-mimi-sign-up-forms' ),
+			esc_html__( 'Mad Mimi API Key', 'mad-mimi-sign-up-forms' ),
 			array( 'Mad_Mimi_Settings_Controls', 'text' ),
 			$this->slug,
 			'general_settings_section',
 			array(
-				'id' => 'api-key',
-				'page' => $this->slug,
-				'description' => sprintf( '<a target="_blank" href="%s">%s</a>', 'http://help.madmimi.com/where-can-i-find-my-api-key/', esc_html__( 'Where can I find my API key?', 'mad-mimi-sign-up-forms' ) ),
-				'label_for' => $this->slug . '-api-key',
+				'id'          => 'api-key',
+				'page'        => $this->slug,
+				'description' => sprintf(
+					'<a target="_blank" href="http://help.madmimi.com/where-can-i-find-my-api-key/">%s</a>',
+					esc_html__( 'Where can I find my API key?', 'mad-mimi-sign-up-forms' )
+				),
+				'label_for'   => "{$this->slug}-api-key",
 			)
 		);
 
@@ -245,9 +262,9 @@ class Mad_Mimi_Settings {
 			$this->slug,
 			'general_settings_section',
 			array(
-				'id' => 'display_powered_by',
-				'page' => $this->slug,
-				'label' => __( 'Display "Powered by Mad Mimi"?', 'mad-mimi-sign-up-forms' ),
+				'id'    => 'display_powered_by',
+				'page'  => $this->slug,
+				'label' => esc_html__( 'Display "Powered by Mad Mimi"?', 'mad-mimi-sign-up-forms' ),
 			)
 		);
 
@@ -270,16 +287,18 @@ class Mad_Mimi_Settings {
 					<h3><?php echo esc_html__( 'Enjoy the Mad Mimi Experience, first hand.', 'mad-mimi-sign-up-forms' ); ?></h3>
 
 					<p><?php echo esc_html__( 'Add your Mad Mimi webform to your WordPress site! Easy to set up, the Mad Mimi plugin allows your site visitors to subscribe to your email list.', 'mad-mimi-sign-up-forms' ); ?></p>
+
 					<p class="description">
-					<?php
-						printf(
-							/* translators: 1. Link to the Mad Mimi account signup. */
-							esc_html__( "Don't have a Mad Mimi account? Get one in less than 2 minutes! %s", 'mad-mimi-sign-up-forms' ),
-							sprintf(
-								'<a target="_blank" href="http://madmimi.com" class="button">%s</a>',
-								esc_html__( 'Sign Up Now', 'mad-mimi-sign-up-forms' )
-							)
-						); ?>
+						<?php
+							printf(
+								/* translators: 1. Link to the Mad Mimi account signup. */
+								esc_html__( "Don't have a Mad Mimi account? Get one in less than 2 minutes! %s", 'mad-mimi-sign-up-forms' ),
+								sprintf(
+									'<a target="_blank" href="http://madmimi.com" class="button">%s</a>',
+									esc_html__( 'Sign Up Now', 'mad-mimi-sign-up-forms' )
+								)
+							);
+						?>
 					</p>
 
 				</div>
@@ -438,7 +457,9 @@ final class Mad_Mimi_Settings_Controls {
 			<?php foreach ( $args['options'] as $name => $label ) : ?>
 
 				<option value="<?php echo esc_attr( $name ); ?>" <?php selected( $name, (string) self::get_option( $args['id'] ) ); ?>>
+
 					<?php echo esc_html( $label ); ?>
+
 				</option>
 
 			<?php endforeach; ?>
@@ -450,24 +471,31 @@ final class Mad_Mimi_Settings_Controls {
 	public static function text( $args ) {
 
 		if ( empty( $args['id'] ) || empty( $args['page'] ) ) {
+
 			return;
-		} ?>
+		}
+
+		?>
 
 		<input type="text" name="<?php echo esc_attr( sprintf( '%s[%s]', $args['page'], $args['id'] ) ); ?>"
 			id="<?php echo esc_attr( sprintf( '%s-%s', $args['page'], $args['id'] ) ) ?>"
 			value="<?php echo esc_attr( self::get_option( $args['id'] ) ); ?>" class="regular-text code" />
 
-		<?php self::show_description( $args );
+		<?php
+
+		self::show_description( $args );
 
 	}
 
 	public static function checkbox( $args ) {
 
 		if ( empty( $args['id'] ) || empty( $args['page'] ) ) {
+
 			return;
+
 		}
 
-		$name = sprintf( '%s[%s]', $args['page'], $args['id'] );
+		$name  = sprintf( '%s[%s]', $args['page'], $args['id'] );
 		$label = isset( $args['label'] ) ? $args['label'] : ''; ?>
 
 		<label for="<?php echo esc_attr( $name ); ?>">
@@ -475,7 +503,9 @@ final class Mad_Mimi_Settings_Controls {
 			<?php echo esc_html( $label ); ?>
 		</label>
 
-		<?php self::show_description( $args );
+		<?php
+
+		self::show_description( $args );
 
 	}
 
@@ -485,7 +515,9 @@ final class Mad_Mimi_Settings_Controls {
 
 			<p class="description"><?php echo wp_kses_post( $field_args['description'] ); ?></p>
 
-		<?php endif;
+		<?php
+
+		endif;
 
 	}
 
@@ -496,4 +528,5 @@ final class Mad_Mimi_Settings_Controls {
 		return ( ! empty( $settings[ $key ] ) ) ? $settings[ $key ] : false;
 
 	}
+
 }

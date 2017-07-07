@@ -22,7 +22,7 @@ class Mad_Mimi_Form_Renderer {
 					<?php do_action( 'mimi_before_fields', $form_id, $form->fields ); ?>
 
 					<?php foreach ( $form->fields as $count => $field ) : ?>
-					<?php // var_dump($field); ?>
+
 						<p><?php Mad_Mimi_Form_Fields::dispatch_field( $field, self::$loops ); ?></p>
 
 					<?php endforeach; ?>
@@ -41,6 +41,7 @@ class Mad_Mimi_Form_Renderer {
 
 					<input type="hidden" name="form_id" value="<?php echo absint( $form->id ); ?>" />
 					<input type="submit" value="<?php echo esc_attr( $form->button_text ); ?>" class="button mimi-submit" />
+
 					<span class="mimi-spinner"></span>
 
 				</form>
@@ -49,7 +50,9 @@ class Mad_Mimi_Form_Renderer {
 			<?php $output = ob_get_clean();
 
 			if ( $echo ) {
+
 				echo $output; // xss ok.
+
 			}
 
 			return $output;
@@ -57,6 +60,7 @@ class Mad_Mimi_Form_Renderer {
 		endif;
 
 	}
+
 }
 
 class Mad_Mimi_Form_Fields {
@@ -66,7 +70,9 @@ class Mad_Mimi_Form_Fields {
 	public static function dispatch_field( $field, $cycle = 1 ) {
 
 		if ( ! is_object( $field ) || ! method_exists( __CLASS__, $field->type ) ) {
+
 			return;
+
 		}
 
 		self::$cycle = absint( $cycle );
@@ -96,7 +102,9 @@ class Mad_Mimi_Form_Fields {
 
 		// is this field required?
 		if ( $args->required ) {
+
 			$field_classes[] = 'mimi-required';
+
 		}
 
 		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
@@ -106,14 +114,16 @@ class Mad_Mimi_Form_Fields {
 			<?php echo esc_html( $args->display ); ?>
 
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
+
 				<span class="required">*</span>
+
 			<?php endif; ?>
 
 		</label>
 
 		<input type="text" name="<?php echo esc_attr( $args->name ); ?>" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" class="<?php echo esc_attr( join( ' ', $field_classes ) ); ?>" />
 
-	<?php
+		<?php
 
 	}
 
@@ -124,7 +134,9 @@ class Mad_Mimi_Form_Fields {
 
 		// is this field required?
 		if ( $args->required ) {
+
 			$field_classes[] = 'mimi-required';
+
 		}
 
 		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
@@ -136,7 +148,9 @@ class Mad_Mimi_Form_Fields {
 			<?php echo esc_html( $args->display ); ?>
 
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
+
 				<span class="required">*</span>
+
 			<?php endif; ?>
 
 		</label>
@@ -148,7 +162,9 @@ class Mad_Mimi_Form_Fields {
 		$field_classes = array( 'mimi-checkbox' );
 
 		if ( $args->required ) {
+
 			$field_classes[] = 'mimi-required';
+
 		}
 
 		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
@@ -156,11 +172,13 @@ class Mad_Mimi_Form_Fields {
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
 			<?php echo esc_html( $args->display ); ?>
+
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
 				<span class="required">*</span>
 			<?php endif; ?>
 
 		</label>
+
 		</br>
 
 		<?php
@@ -175,7 +193,7 @@ class Mad_Mimi_Form_Fields {
 		}
 
 		$trimmed_options = array();
-		$options = str_replace( '"', '', $options );
+		$options         = str_replace( '"', '', $options );
 		$trimmed_options = explode( ',', $options );
 
 		foreach ( $trimmed_options as $key => $value ) { ?>
@@ -207,6 +225,7 @@ class Mad_Mimi_Form_Fields {
 			<?php endif; ?>
 
 		</label>
+
 		</br>
 
 		<select id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" name="<?php echo esc_attr( $args->name ); ?>">
@@ -228,14 +247,14 @@ class Mad_Mimi_Form_Fields {
 		$trimmed_options = explode( ',', $options );
 
 		foreach ( $trimmed_options as $dropdown_options ) { ?>
+
 			<option value="<?php echo esc_attr( $dropdown_options ); ?>"> <?php echo $dropdown_options; // xss ok. ?><br>
+
 		<?php } ?>
 
 		</select>
 
-
-
-	<?php
+		<?php
 
 	}
 
@@ -256,7 +275,9 @@ class Mad_Mimi_Form_Fields {
 			<?php echo esc_html( $args->display ); ?>
 
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
+
 				<span class="required">*</span>
+
 			<?php endif; ?>
 
 		</label>
@@ -301,11 +322,15 @@ class Mad_Mimi_Form_Fields {
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
 			<?php echo esc_html( $args->display ); ?>
+
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
+
 				<span class="required">*</span>
+
 			<?php endif; ?>
 
 		</label>
+
 		</br>
 
 		<?php $current_year = date( 'Y' ); ?>
@@ -358,7 +383,9 @@ class Mad_Mimi_Form_Fields {
 
 		// is this field required?
 		if ( $args->required ) {
+
 			$field_classes[] = 'mimi-required';
+
 		}
 
 		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
@@ -368,13 +395,16 @@ class Mad_Mimi_Form_Fields {
 			<?php echo esc_html( $args->display ); ?>
 
 			<?php if ( $args->required && apply_filters( 'mimi_required_field_indicator', true, $args ) ) : ?>
+
 				<span class="required">*</span>
+
 			<?php endif; ?>
 
 		</label>
 
 		<input type="text" name="<?php echo esc_attr( $args->name ); ?>" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" class="<?php echo esc_attr( join( ' ', $field_classes ) ); ?>" />
 
-	<?php }
+		<?php
+	}
+
 }
-?>

@@ -15,7 +15,9 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 		) );
 
 		foreach ( array( 'wpautop', 'wptexturize', 'convert_chars' ) as $filter ) {
+
 			add_filter( 'mimi_widget_text', $filter );
+
 		}
 
 	}
@@ -24,11 +26,15 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 
 		// Set the initial form ID value if one exists.
 		if ( empty( $instance['form'] ) ) {
+
 			$forms = Mad_Mimi_Dispatcher::get_forms();
 
 			if ( ! empty( $forms->signups ) ) {
+
 				$instance['form'] = $forms->signups[0]->id;
+
 			}
+
 		}
 
 		$title   = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Mad Mimi Form', 'mad-mimi-sign-up-forms' ) : $instance['title'], $instance, $this->id_base );
@@ -38,11 +44,15 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 		echo $args['before_widget']; // xss ok.
 
 		if ( $title ) {
+
 			echo $args['before_title'] . esc_html( $title ) . $args['after_title']; // xss ok.
+
 		}
 
 		if ( $text ) {
+
 			echo wp_kses_post( apply_filters( 'mimi_widget_text', $text ) );
+
 		}
 
 		Mad_Mimi_Form_Renderer::process( $form_id, true );
@@ -101,23 +111,27 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 			<?php else : ?>
 
 			<span>
-				<?php echo wp_kses(
-					sprintf(
-						/* translators: Link to the settings page. */
-						esc_html__( 'Please set up your Mad Mimi account in the %s.', 'mad-mimi-sign-up-forms' ),
+				<?php
+					echo wp_kses(
 						sprintf(
-							'<a href="%1$s">%2$s</a>',
-							esc_url_raw( admin_url( 'options-general.php?page=mad-mimi-settings' ) ),
-							esc_html__( 'settings page', 'mad-mimi-sign-up-forms' )
+							/* translators: Link to the settings page. */
+							esc_html__( 'Please set up your Mad Mimi account in the %s.', 'mad-mimi-sign-up-forms' ),
+							sprintf(
+								'<a href="%1$s">%2$s</a>',
+								esc_url_raw( admin_url( 'options-general.php?page=mad-mimi-settings' ) ),
+								esc_html__( 'settings page', 'mad-mimi-sign-up-forms' )
+							)
 						)
-					)
-				); ?>
+					);
+				?>
 			</span>
 
 			<?php endif; ?>
 
 		</p>
 
-	<?php }
+	<?php
+
+	}
 
 }
