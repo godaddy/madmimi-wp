@@ -5,7 +5,7 @@ class Mad_Mimi_Dispatcher {
 	/**
 	 * API's base URL
 	 */
-	const BASE_API = 'http://api.madmimi.com/';
+	const BASE_API = 'http://madmimi.com/';
 
 	private static $ok_codes = array( 200, 304 );
 
@@ -213,6 +213,7 @@ class Mad_Mimi_Dispatcher {
 		}
 
 		return self::BASE_API . $path;
+
 	}
 
 	public static function is_response_ok( &$request ) {
