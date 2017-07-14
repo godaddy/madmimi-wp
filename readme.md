@@ -4,7 +4,7 @@
 **Contributors:** [madmimi](https://profiles.wordpress.org/madmimi), [humanmade](https://profiles.wordpress.org/humanmade), [xwp](https://profiles.wordpress.org/xwp), [illuminea](https://profiles.wordpress.org/illuminea), [maor](https://profiles.wordpress.org/maor), [beccawitz](https://profiles.wordpress.org/beccawitz)  
 **Tags:** [email](https://wordpress.org/plugins/tags/email/), [forms](https://wordpress.org/plugins/tags/forms/), [mailing list](https://wordpress.org/plugins/tags/mailing-list/), [marketing](https://wordpress.org/plugins/tags/marketing/), [newsletter](https://wordpress.org/plugins/tags/newsletter/), [opt-in](https://wordpress.org/plugins/tags/opt-in/), [signup](https://wordpress.org/plugins/tags/signup/), [subscribe](https://wordpress.org/plugins/tags/subscribe/), [widget](https://wordpress.org/plugins/tags/widget/), [contacts](https://wordpress.org/plugins/tags/contacts/)  
 **Requires at least:** 3.8  
-**Tested up to:** 4.5  
+**Tested up to:** 4.8  
 **Stable tag:** 1.5.1  
 **License:** GPL-2.0  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -73,6 +73,11 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 4. The widget on the widgets page.
 
 ## Changelog ##
+
+### NEXT ###
+* Fix: Resolve 'Mixed Content' warning when using on sites with SSL enabled.
+* Fix: Various code improvements.
+* New: jQuery UI is now enqueued locally and not via a CDN.
 
 ### 1.5.1 ###
 * Fixed shortcode display.

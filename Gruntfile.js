@@ -149,6 +149,14 @@ module.exports = function( grunt ) {
 						to: '@since$1' + pkg.version
 					},
 					{
+						from: /@deprecated(\s+)NEXT/g,
+						to: '@deprecated$1<%= pkg.version %>'
+					},
+					{
+						from: /@NEXT/g,
+						to: '<%= pkg.version %>'
+					},
+					{
 						from: /VERSION(\s*?)=(\s*?['"])[a-zA-Z0-9\.\-\+]+/mg,
 						to: 'VERSION$1=$2' + pkg.version
 					}
