@@ -340,8 +340,6 @@ class Mad_Mimi_Form_Fields {
 
 		</label>
 
-		</br>
-
 		<?php $current_year = date( 'Y' ); ?>
 
 			<span class="third">
