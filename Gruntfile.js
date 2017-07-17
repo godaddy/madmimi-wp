@@ -169,6 +169,10 @@ module.exports = function( grunt ) {
 					{
 						from: /^(\*\*|)Stable tag:(\*\*|)(\s*?)[a-zA-Z0-9.-]+(\s*?)$/mi,
 						to: '$1Stable tag:$2$3<%= pkg.version %>$4'
+					},
+					{
+						from: /@NEXT/g,
+						to: '<%= pkg.version %>'
 					}
 				]
 			}
