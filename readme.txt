@@ -70,7 +70,7 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 
 == Changelog ==
 
-= NEXT =
+= @NEXT =
 * Fix: Resolve 'Mixed Content' warning when using on sites with SSL enabled.
 * Fix: Various code improvements.
 * New: jQuery UI is now enqueued locally and not via a CDN.
