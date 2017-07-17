@@ -8,10 +8,6 @@ form.mimi-form p {
 	padding: 0;
 }
 
-form.mimi-form select {
-	font-size: 1.6rem;
-}
-
 input.mimi-invalid {
 	border: 1px solid red;
 }
