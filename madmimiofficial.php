@@ -145,14 +145,8 @@ class MadMimi_Official {
 		// main JavaScript file
 		wp_enqueue_script( 'mimi-main', plugins_url( "js/mimi{$suffix}.js", __FILE__ ), array( 'jquery' ), MADMIMI_VERSION, true );
 
-		// JQuery-ui
-		wp_enqueue_script( 'jquery-ui', plugins_url( "js/jquery-ui{$suffix}.js", __FILE__ ), array( 'jquery' ), '1.11.4' );
-
 		// assistance CSS
 		wp_enqueue_style( 'mimi-base', plugins_url( "css/mimi{$suffix}.css", __FILE__ ), false, MADMIMI_VERSION );
-
-		// datepicker CSS
-		wp_enqueue_style( 'jquery-ui', plugins_url( "css/jquery-ui{$rtl}{$suffix}.css", __FILE__ ), true, MADMIMI_VERSION );
 
 		// help strings
 		wp_localize_script( 'mimi-main', 'MadMimi', array(
