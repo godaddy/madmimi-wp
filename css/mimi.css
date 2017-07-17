@@ -46,6 +46,13 @@ input.mimi-invalid {
 }
 
 /**
+ * Widgets
+ */
+.widget.mimi-form span.third {
+	display: inline-block;
+}
+
+/**
  * HiDPI Displays
  */
 @media print,
