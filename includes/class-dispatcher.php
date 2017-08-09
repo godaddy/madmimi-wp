@@ -5,15 +5,18 @@ class Mad_Mimi_Dispatcher {
 	/**
 	 * API's base URL
 	 */
-	const BASE_API = 'http://api.madmimi.com/';
+	const BASE_API = 'https://madmimi.com/';
 
 	private static $ok_codes = array( 200, 304 );
 
 	public static function fetch_forms( $username, $api_key = false ) {
 
 		if ( ! ( $username && $api_key ) ) {
+
 			$username = Mad_Mimi_Settings_Controls::get_option( 'username' );
+
 			$api_key  = Mad_Mimi_Settings_Controls::get_option( 'api-key' );
+
 		}
 
 		$auth = array(
@@ -27,16 +30,20 @@ class Mad_Mimi_Dispatcher {
 		) );
 
 		// delete all existing transients for this user
-		delete_transient( 'mimi-' . $username . '-lists' );
+		delete_transient( "mimi-{$username}-lists" );
 
 		// credentials are incorrect
-		if ( ! in_array( wp_remote_retrieve_response_code( $response ), self::$ok_codes ) ) {
+		if ( ! in_array( wp_remote_retrieve_response_code( $response ), self::$ok_codes, true ) ) {
+
 			return false;
+
 		}
+
+		$data = json_decode( wp_remote_retrieve_body( $response ) );
 
 		// @todo should we cache for *always* since we have a button to clear the cache?
 		// maybe having an expiration on such a thing can bloat wp_options?
-		set_transient( 'mimi-' . $username . '-lists', $data = json_decode( wp_remote_retrieve_body( $response ) ), defined( DAY_IN_SECONDS ) ? DAY_IN_SECONDS : 60 * 60 * 24 );
+		set_transient( "mimi-{$username}-lists", $data, defined( DAY_IN_SECONDS ) ? DAY_IN_SECONDS : 60 * 60 * 24 );
 
 		return $data;
 
@@ -45,14 +52,20 @@ class Mad_Mimi_Dispatcher {
 	public static function get_forms( $username = false ) {
 
 		$username = $username ? $username : Mad_Mimi_Settings_Controls::get_option( 'username' );
-		$api_key = Mad_Mimi_Settings_Controls::get_option( 'api-key' );
+		$api_key  = Mad_Mimi_Settings_Controls::get_option( 'api-key' );
 
 		if ( empty( $api_key ) ) {
+
 			return false;
+
 		}
 
-		if ( false === ( $data = get_transient( 'mimi-' . $username . '-lists' ) ) ) {
+		$data = get_transient( "mimi-{$username}-lists" );
+
+		if ( false === $data ) {
+
 			$data = self::fetch_forms( $username );
+
 		}
 
 		return $data;
@@ -61,7 +74,9 @@ class Mad_Mimi_Dispatcher {
 
 	public static function get_fields( $form_id ) {
 
-		if ( false === ( $fields = get_transient( 'mimi-form-' . $form_id ) ) ) {
+		$fields = get_transient( "mimi-form-{$form_id}" );
+
+		if ( false === $fields ) {
 
 			// fields are not cached. fetch and cache.
 			$fields = wp_remote_get( self::get_method_url( 'fields', array(
@@ -70,14 +85,20 @@ class Mad_Mimi_Dispatcher {
 
 			// was there an error, connection is down? bail and try again later.
 			if ( ! self::is_response_ok( $fields ) ) {
+
 				return false;
+
 			}
 
+			$fields = json_decode( wp_remote_retrieve_body( $fields ) );
+
 			// @TODO: should we cache results for longer than a day? not expire at all?
-			set_transient( 'mimi-form-' . $form_id, $fields = json_decode( wp_remote_retrieve_body( $fields ) ) );
+			set_transient( "mimi-form-{$form_id}", $fields );
+
 		}
 
 		return $fields;
+
 	}
 
 	public static function get_user_level() {
@@ -85,23 +106,30 @@ class Mad_Mimi_Dispatcher {
 		$username = Mad_Mimi_Settings_Controls::get_option( 'username' );
 
 		// no username entered by user?
-		if ( ! $username )
+		if ( ! $username ) {
+
 			return false;
 
-		if ( false === ( $data = get_transient( 'mimi-' . $username . '-account' ) ) ) {
+		}
+
+		$data = get_transient( "mimi-{$username}-account" );
+
+		if ( false === $data ) {
 
 			$data = wp_remote_get( self::get_method_url( 'account' ) );
 
 			// if the request has failed for whatever reason
 			if ( ! self::is_response_ok( $data ) ) {
+
 				return false;
+
 			}
 
 			$data = json_decode( wp_remote_retrieve_body( $data ) );
 			$data = $data->result;
 
 			// no need to expire at all
-			set_transient( 'mimi-' . $username . '-account', $data );
+			set_transient( "mimi-{$username}-account", $data );
 
 		}
 
@@ -117,8 +145,10 @@ class Mad_Mimi_Dispatcher {
 		) );
 
 		// credentials are incorrect
-		if ( ! in_array( wp_remote_retrieve_response_code( $response ), self::$ok_codes ) ) {
+		if ( ! in_array( wp_remote_retrieve_response_code( $response ), self::$ok_codes, true ) ) {
+
 			return false;
+
 		}
 
 		// retrieve the token
@@ -156,7 +186,7 @@ class Mad_Mimi_Dispatcher {
 
 			case 'fields' :
 
-				$path = add_query_arg( $auth, 'signups/' . $params['id'] . '.json' );
+				$path = add_query_arg( $auth, "signups/{$params['id']}.json" );
 
 				break;
 
@@ -183,10 +213,13 @@ class Mad_Mimi_Dispatcher {
 		}
 
 		return self::BASE_API . $path;
+
 	}
 
 	public static function is_response_ok( &$request ) {
-		return ( ! is_wp_error( $request ) && in_array( wp_remote_retrieve_response_code( $request ), self::$ok_codes ) );
+
+		return ( ! is_wp_error( $request ) && in_array( wp_remote_retrieve_response_code( $request ), self::$ok_codes, true ) );
+
 	}
 
 }

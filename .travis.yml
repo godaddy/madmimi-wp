@@ -1,0 +1,67 @@
+sudo: false
+
+language: php
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+branches:
+  only:
+    - /^v\d.*$/
+    - master
+    - develop
+
+cache:
+  directories:
+    - node_modules
+    - vendor
+    - $HOME/.composer/cache
+
+php:
+  - 5.6
+  - 7.1
+
+env:
+  - WP_VERSION=4.4 WP_MULTISITE=0
+  - WP_VERSION=latest WP_MULTISITE=0
+  - WP_VERSION=trunk WP_MULTISITE=0
+
+matrix:
+  fast_finish: true
+  exclude:
+    - php: 7.1
+      env: WP_VERSION=4.4 WP_MULTISITE=0
+
+before_install:
+  - phpenv config-rm xdebug.ini
+
+install:
+  - export DEV_LIB_PATH=dev-lib
+  - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
+  - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
+  - source $DEV_LIB_PATH/travis.install.sh
+
+script:
+  - source $DEV_LIB_PATH/travis.script.sh
+
+before_deploy:
+  - export RELEASE_FOLDER=mad-mimi-sign-up-forms
+  - php /tmp/wp-cli.phar package install runcommand/dist-archive
+  - cp -r ${TRAVIS_BUILD_DIR} /tmp/${RELEASE_FOLDER}
+  - mv /tmp/${RELEASE_FOLDER} ${TRAVIS_BUILD_DIR}
+  - php /tmp/wp-cli.phar dist-archive ${RELEASE_FOLDER} ${TRAVIS_BUILD_DIR}/${RELEASE_FOLDER}.zip --format=zip --debug
+
+deploy:
+  provider: releases
+  api_key:
+    secure: JyF51/WstXFpqMPOexhtE1o9u9Uge1xUZbSMjNaOaUcRbMkQ3WOML+WfnFo/xnLZI1puUzS8XrvhpTZll1Kot3OltRP2Z6lBp02ACh/e9cPwrFaBwy8evj977SaizdhWmzjhZqnN0vDiheyyONOc3QnUfLChR5QBhdnh8IfXSHg=
+  file: $RELEASE_FOLDER.zip
+  on:
+    tags: true
+    repo: madmimi/madmimi-wp
+    php: '7.1'
+    condition: "$WP_VERSION=trunk"
+  skip_cleanup: true
+  overwrite: true

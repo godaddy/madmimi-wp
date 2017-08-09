@@ -2,7 +2,7 @@
 Contributors: madmimi, humanmade, xwp, illuminea, maor, beccawitz
 Tags: email, forms, mailing list, marketing, newsletter, opt-in, signup, subscribe, widget, contacts
 Requires at least: 3.8
-Tested up to: 4.5
+Tested up to: 4.8.1
 Stable tag: 1.5.1
 License: GPL-2.0
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -11,7 +11,7 @@ Add the Mad Mimi webform to your WordPress site! Easy to set up, the Mad Mimi pl
 
 == Description ==
 
-The Official Mad Mimi Signup Form plugin makes it easy to grow your subscribers! Use this plugin to integrate your sign up forms into your WordPress site. To learn more about Mad Mimi, grab a [FREE forever account](http://madmimi.com) and explore.
+The Official Mad Mimi Signup Form plugin makes it easy to grow your subscribers! Use this plugin to integrate your sign up forms into your WordPress site. To learn more about Mad Mimi, grab a [FREE forever account](https://madmimi.com) and explore.
 
 Once the plugin is activated, you can select and insert any of your Mad Mimi webforms right into your site by using a widget, shortcode, or template tag. Setup is easy; in Settings, simply enter your account email address and API key (found in your [Mad Mimi account](http://help.madmimi.com/where-can-i-find-my-api-key/) area), and you're all set.
 
@@ -69,6 +69,12 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 4. The widget on the widgets page.
 
 == Changelog ==
+
+= @NEXT =
+* New: Reference to jQuery UI has been removed.
+* Tweak: Styles updated for MadMimi fancy fields.
+* Fix: Resolved 'Mixed Content' warning when using on sites with SSL enabled.
+* Fix: Various code improvements.
 
 = 1.5.1 =
 * Fixed shortcode display.

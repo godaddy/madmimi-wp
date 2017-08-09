@@ -7,8 +7,10 @@
  * Version: 1.5.1
  * Author URI: https://madmimi.com/
  * License: GPL-2.0
+ * Text Domain: mad-mimi-sign-up-forms
+ * Domain Path: /languages
  *
- * Copyright © 2016 Mad Mimi, LLC. All Rights Reserved.
+ * Copyright © 2017 Mad Mimi, LLC. All Rights Reserved.
  */
 
 class MadMimi_Official {
@@ -21,26 +23,29 @@ class MadMimi_Official {
 
 	public static function instance() {
 
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self;
-			self::$instance->setup_constants();
-			self::$instance->requirements();
-			self::$instance->setup_actions();
+		if ( isset( self::$instance ) ) {
+
+			return self::$instance;
+
 		}
 
-		return self::$instance;
+		self::$instance = new self();
+		self::$instance->setup_constants();
+		self::$instance->requirements();
+		self::$instance->setup_actions();
 
 	}
 
 	private function setup_actions() {
 
-		add_action( 'init', 		 array( $this, 'init' ) );
+		add_action( 'init',          array( $this, 'init' ) );
 		add_action( 'widgets_init',  array( $this, 'register_widget' ) );
-		add_action( 'init', 		 array( $this, 'register_shortcode'	), 20 );
+		add_action( 'init',          array( $this, 'register_shortcode' ), 20 );
 		add_action( 'admin_notices', array( $this, 'action_admin_notices' ) );
+
 		add_filter( 'plugin_action_links_' . self::$basename, array( $this, 'action_links' ), 10 );
 
-		register_activation_hook( __FILE__, array( $this, 'activate' ) );
+		register_activation_hook( __FILE__,   array( $this, 'activate' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 
 	}
@@ -48,23 +53,34 @@ class MadMimi_Official {
 	private function setup_constants() {
 
 		// Plugin's main directory
-		defined( 'MADMIMI_PLUGIN_DIR' )
-			or define( 'MADMIMI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+		if ( ! defined( 'MADMIMI_PLUGIN_DIR' ) ) {
+
+			define( 'MADMIMI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+		}
 
 		// Absolute URL to plugin's dir
-		defined( 'MADMIMI_PLUGIN_URL' )
-			or define( 'MADMIMI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+		if ( ! defined( 'MADMIMI_PLUGIN_URL' ) ) {
+
+			define( 'MADMIMI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
+		}
 
 		// Absolute URL to plugin's dir
-		defined( 'MADMIMI_PLUGIN_BASE' )
-			or define( 'MADMIMI_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+		if ( ! defined( 'MADMIMI_PLUGIN_BASE' ) ) {
+
+			define( 'MADMIMI_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+
+		}
 
 		// Plugin version
-		defined( 'MADMIMI_VERSION' )
-			or define( 'MADMIMI_VERSION', '1.5.1' );
+		if ( ! defined( 'MADMIMI_VERSION' ) ) {
 
-		// Set up the base name
-		isset( self::$basename ) || self::$basename = plugin_basename( __FILE__ );
+			define( 'MADMIMI_VERSION', '1.5.1' );
+
+		}
+
+		self::$basename = isset( self::$basename ) ? self::$basename : MADMIMI_PLUGIN_BASE;
 
 	}
 
@@ -94,14 +110,16 @@ class MadMimi_Official {
 
 		// initialize settings
 		if ( is_admin() ) {
-			$this->settings = new Mad_Mimi_Settings;
+
+			$this->settings = new Mad_Mimi_Settings();
+
 		}
 
 		// enqueue scripts n styles
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
 
 		// Load our textdomain to allow multilingual translations
-		load_plugin_textdomain( 'mimi', false, dirname( self::$basename ) . '/languages/' );
+		load_plugin_textdomain( 'mad-mimi-sign-up-forms', false, dirname( self::$basename ) . '/languages/' );
 
 	}
 
@@ -114,32 +132,28 @@ class MadMimi_Official {
 	}
 
 	public function register_widget() {
+
 		register_widget( 'Mad_Mimi_Form_Widget' );
+
 	}
 
 	public function enqueue() {
 
+		$suffix = SCRIPT_DEBUG ? '' : '.min';
+		$rtl    = ! is_rtl() ? '' : '-rtl';
+
 		// main JavaScript file
-		wp_enqueue_script( 'mimi-main', plugins_url( 'js/mimi.js', __FILE__ ), array( 'jquery' ), MADMIMI_VERSION, true );
-
-		// datepicker JavaScript file
-		wp_enqueue_script( 'function', plugins_url( 'js/function.js', __FILE__ ), array( 'jquery' ), MADMIMI_VERSION, true );
-
-		// JQuery-ui
-		wp_enqueue_script('jquery-ui', 'http://code.jquery.com/ui/1.11.4/jquery-ui.js', array('jquery'), '1.11.4');
+		wp_enqueue_script( 'mimi-main', plugins_url( "js/mimi{$suffix}.js", __FILE__ ), array( 'jquery' ), MADMIMI_VERSION, true );
 
 		// assistance CSS
-		wp_enqueue_style( 'mimi-base', plugins_url( 'css/mimi.css', __FILE__ ), false, MADMIMI_VERSION );
-
-		// datepicker CSS
-		wp_enqueue_style( 'jquery-ui', plugins_url( 'css/jquery-ui.css', __FILE__ ), true, MADMIMI_VERSION );
+		wp_enqueue_style( 'mimi-base', plugins_url( "css/mimi{$suffix}.css", __FILE__ ), false, MADMIMI_VERSION );
 
 		// help strings
 		wp_localize_script( 'mimi-main', 'MadMimi', array(
-			'thankyou' 				=> _x( 'Thank you for signing up!', 'ajax response', 'mimi' ),
-			'thankyou_suppressed' 	=> _x( 'Thank you for signing up! Please check your email to confirm your subscription.', 'ajax response', 'mimi' ),
-			'oops' 					=> _x( 'Oops! There was a problem. Please try again.', 'ajax response', 'mimi' ),
-			'fix' 					=> _x( 'There was a problem. Please fill all required fields.', 'ajax response', 'mimi' ),
+			'thankyou'            => __( 'Thank you for signing up!', 'mad-mimi-sign-up-forms' ),
+			'thankyou_suppressed' => __( 'Thank you for signing up! Please check your email to confirm your subscription.', 'mad-mimi-sign-up-forms' ),
+			'oops'                => __( 'Oops! There was a problem. Please try again.', 'mad-mimi-sign-up-forms' ),
+			'fix'                 => __( 'There was a problem. Please fill all required fields.', 'mad-mimi-sign-up-forms' ),
 		) );
 
 	}
@@ -148,7 +162,7 @@ class MadMimi_Official {
 
 		return array_merge(
 			array(
-				'settings' => sprintf( '<a href="%s">%s</a>', menu_page_url( 'mad-mimi-settings', false ), __( 'Settings', 'mimi' ) )
+				'settings' => sprintf( '<a href="%s">%s</a>', menu_page_url( 'mad-mimi-settings', false ), __( 'Settings', 'mad-mimi-sign-up-forms' ) ),
 			),
 			$actions
 		);
@@ -160,15 +174,19 @@ class MadMimi_Official {
 	}
 
 	public function deactivate() {
+
 		delete_option( 'madmimi-version' );
+
 	}
 
 	public function action_admin_notices() {
 
 		$screen = get_current_screen();
 
-		if ( 'plugins' != $screen->id ) {
+		if ( 'plugins' !== $screen->id ) {
+
 			return;
+
 		}
 
 		$version = get_option( 'madmimi-version' );
@@ -179,8 +197,8 @@ class MadMimi_Official {
 
 			<div class="updated fade">
 				<p>
-					<strong><?php esc_html_e( 'Mad Mimi is almost ready.', 'mimi' ); ?></strong> <?php esc_html_e( 'You must enter your Mad Mimi username &amp; API key for it to work.', 'mimi' ); ?> &nbsp;
-					<a class="button" href="<?php menu_page_url( 'mad-mimi-settings' ); ?>"><?php esc_html_e( 'Let\'s do it!', 'mimi' ); ?></a>
+					<strong><?php esc_html_e( 'Mad Mimi is almost ready.', 'mad-mimi-sign-up-forms' ); ?></strong><?php esc_html_e( 'You must enter your Mad Mimi username &amp; API key for it to work.', 'mad-mimi-sign-up-forms' ); ?>&nbsp;
+					<a class="button" href="<?php esc_url( menu_page_url( 'mad-mimi-settings' ) ); ?>"><?php esc_html_e( 'Let\'s do it!', 'mad-mimi-sign-up-forms' ); ?></a>
 				</p>
 			</div>
 
@@ -190,6 +208,8 @@ class MadMimi_Official {
 }
 
 function madmimi() {
+
 	return MadMimi_Official::instance();
+
 }
 add_action( 'plugins_loaded', 'madmimi' );

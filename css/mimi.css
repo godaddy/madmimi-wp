@@ -8,10 +8,6 @@ form.mimi-form p {
 	padding: 0;
 }
 
-form.mimi-form select {
-	font-size: 1.6rem;
-}
-
 input.mimi-invalid {
 	border: 1px solid red;
 }
@@ -47,6 +43,13 @@ input.mimi-invalid {
 	form.mimi-form select {
 		margin-top: 5px;
 	}
+}
+
+/**
+ * Widgets
+ */
+.widget.mimi-form span.third {
+	display: inline-block;
 }
 
 /**
