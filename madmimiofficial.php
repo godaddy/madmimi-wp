@@ -29,7 +29,7 @@ class MadMimi_Official {
 
 		}
 
-		self::$instance = new self;
+		self::$instance = new self();
 		self::$instance->setup_constants();
 		self::$instance->requirements();
 		self::$instance->setup_actions();
@@ -40,7 +40,7 @@ class MadMimi_Official {
 
 		add_action( 'init',          array( $this, 'init' ) );
 		add_action( 'widgets_init',  array( $this, 'register_widget' ) );
-		add_action( 'init',          array( $this, 'register_shortcode'	), 20 );
+		add_action( 'init',          array( $this, 'register_shortcode' ), 20 );
 		add_action( 'admin_notices', array( $this, 'action_admin_notices' ) );
 
 		add_filter( 'plugin_action_links_' . self::$basename, array( $this, 'action_links' ), 10 );
@@ -111,7 +111,7 @@ class MadMimi_Official {
 		// initialize settings
 		if ( is_admin() ) {
 
-			$this->settings = new Mad_Mimi_Settings;
+			$this->settings = new Mad_Mimi_Settings();
 
 		}
 

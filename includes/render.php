@@ -29,9 +29,13 @@ class Mad_Mimi_Form_Renderer {
 
 					<?php do_action( 'mimi_after_fields', $form_id, $form->fields ); ?>
 
-					<?php $show_powered_by = Mad_Mimi_Settings_Controls::get_option( 'display_powered_by' ) ? true : false;
+					<?php
 
-					if ( $show_powered_by ) : ?>
+					$show_powered_by = Mad_Mimi_Settings_Controls::get_option( 'display_powered_by' ) ? true : false;
+
+					if ( $show_powered_by ) :
+
+						?>
 
 						<p>
 							<a href="https://madmimi.com" target="_blank"><?php esc_html_e( 'Powered by Mad Mimi', 'mad-mimi-sign-up-forms' ); ?></a>
@@ -47,7 +51,9 @@ class Mad_Mimi_Form_Renderer {
 				</form>
 			</div>
 
-			<?php $output = ob_get_clean();
+			<?php
+
+			$output = ob_get_clean();
 
 			if ( $echo ) {
 
@@ -107,7 +113,9 @@ class Mad_Mimi_Form_Fields {
 
 		}
 
-		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+
+		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
@@ -139,7 +147,9 @@ class Mad_Mimi_Form_Fields {
 
 		}
 
-		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+
+		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) . $args->value ); ?>">
 
@@ -155,7 +165,9 @@ class Mad_Mimi_Form_Fields {
 
 		</label>
 
-	<?php }
+	<?php
+
+	}
 
 	public static function checkboxes( $args ) {
 
@@ -167,7 +179,9 @@ class Mad_Mimi_Form_Fields {
 
 		}
 
-		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+
+		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
@@ -198,13 +212,17 @@ class Mad_Mimi_Form_Fields {
 		$options         = str_replace( '"', '', $options );
 		$trimmed_options = explode( ',', $options );
 
-		foreach ( $trimmed_options as $key => $value ) { ?>
+		foreach ( $trimmed_options as $key => $value ) {
+
+			?>
 
 			<input type="checkbox" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" name="<?php echo esc_attr( $args->name ); ?>" value="<?php echo esc_attr( $value ); ?>"> <?php echo esc_html( $value ); ?><br>
 
 		<?php } ?>
 
-	<?php }
+	<?php
+
+	}
 
 
 	public static function dropdown( $args) {
@@ -217,7 +235,9 @@ class Mad_Mimi_Form_Fields {
 
 		}
 
-		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+
+		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
@@ -251,7 +271,9 @@ class Mad_Mimi_Form_Fields {
 		$options         = str_replace( '"', '', $options );
 		$trimmed_options = explode( ',', $options );
 
-		foreach ( $trimmed_options as $dropdown_options ) { ?>
+		foreach ( $trimmed_options as $dropdown_options ) {
+
+			?>
 
 			<option value="<?php echo esc_attr( $dropdown_options ); ?>"> <?php echo $dropdown_options; // xss ok. ?><br>
 
@@ -277,7 +299,9 @@ class Mad_Mimi_Form_Fields {
 
 		}
 
-		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+
+		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
@@ -308,13 +332,17 @@ class Mad_Mimi_Form_Fields {
 		$options         = str_replace( '"', '', $options );
 		$trimmed_options = explode( ',', $options );
 
-		foreach ( $trimmed_options as $radio_options ) { ?>
+		foreach ( $trimmed_options as $radio_options ) {
+
+			?>
 
 				<input type="radio" id="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>" name="<?php echo esc_attr( $args->name ); ?>" value="<?php echo esc_attr( $radio_options ); ?>"> <?php echo $radio_options; // xss ok. ?><br>
 
-		<?php } ?>
+		<?php
 
-	<?php }
+		}
+
+	}
 
 	public static function date( $args ) {
 
@@ -326,7 +354,9 @@ class Mad_Mimi_Form_Fields {
 
 		}
 
-		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+
+		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 
@@ -397,7 +427,9 @@ class Mad_Mimi_Form_Fields {
 
 		}
 
-		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args ); ?>
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+
+		?>
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
 

@@ -5,6 +5,9 @@
 	<rule ref="WordPress-Extra">
 		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing" />
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"></exclude>
+		<exclude name="PSR2.ControlStructures.SwitchDeclaration.SpaceBeforeColonCASE"></exclude>
+		<exclude name="PSR2.ControlStructures.SwitchDeclaration.BodyOnNextLineCASE"></exclude>
+		<exclude name="Squiz.PHP.EmbeddedPhp.SpacingBeforeClose"></exclude>
 	</rule>
 
 	<exclude-pattern>*/dev-lib/*</exclude-pattern>
