@@ -1,5 +1,4 @@
 svn-username
 build/
 node_modules/
-tests/codeception/_output/*
 vendor/
