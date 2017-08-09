@@ -135,7 +135,7 @@ module.exports = function( grunt ) {
 		replace: {
 			php: {
 				src: [
-					pkg.name + '.php',
+					'madmimiofficial.php',
 					'includes/**/*.php'
 				],
 				overwrite: true,
@@ -218,7 +218,7 @@ module.exports = function( grunt ) {
 				options: {
 					assets_dir: 'wp-org-assets/',
 					build_dir: 'build/',
-					plugin_main_file: pkg.name + '.php',
+					plugin_main_file: 'madmimiofficial.php',
 					plugin_slug: pkg.name
 				}
 			}
