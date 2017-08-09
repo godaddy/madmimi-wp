@@ -135,7 +135,7 @@ module.exports = function( grunt ) {
 		replace: {
 			php: {
 				src: [
-					pkg.name + '.php',
+					'madmimiofficial.php',
 					'includes/**/*.php'
 				],
 				overwrite: true,
