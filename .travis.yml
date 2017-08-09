@@ -42,22 +42,15 @@ install:
   - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
   - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
   - source $DEV_LIB_PATH/travis.install.sh
-<<<<<<< HEAD
-=======
   - curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli-nightly.phar > /tmp/wp-cli.phar
   - chmod +x /tmp/wp-cli.phar
->>>>>>> master
 
 script:
   - source $DEV_LIB_PATH/travis.script.sh
 
 before_deploy:
   - export RELEASE_FOLDER=mad-mimi-sign-up-forms
-<<<<<<< HEAD
-  - php /tmp/wp-cli.phar package install runcommand/dist-archive
-=======
   - php /tmp/wp-cli.phar package install git@github.com:wp-cli/dist-archive-command.git
->>>>>>> master
   - cp -r ${TRAVIS_BUILD_DIR} /tmp/${RELEASE_FOLDER}
   - mv /tmp/${RELEASE_FOLDER} ${TRAVIS_BUILD_DIR}
   - php /tmp/wp-cli.phar dist-archive ${RELEASE_FOLDER} ${TRAVIS_BUILD_DIR}/${RELEASE_FOLDER}.zip --format=zip --debug
