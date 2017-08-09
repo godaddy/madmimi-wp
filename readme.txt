@@ -3,7 +3,7 @@ Contributors: madmimi, humanmade, xwp, illuminea, maor, beccawitz
 Tags: email, forms, mailing list, marketing, newsletter, opt-in, signup, subscribe, widget, contacts
 Requires at least: 3.8
 Tested up to: 4.8.1
-Stable tag: 1.5.1
+Stable tag: 1.6.0
 License: GPL-2.0
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,7 +70,7 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 
 == Changelog ==
 
-= @NEXT =
+= 1.6.0 =
 * New: Reference to jQuery UI has been removed.
 * Tweak: Styles updated for MadMimi fancy fields.
 * Fix: Resolved 'Mixed Content' warning when using on sites with SSL enabled.
