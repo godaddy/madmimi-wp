@@ -85,6 +85,14 @@ class Mad_Mimi_Form_Fields {
 
 		if ( ! is_null( $field->field_type ) ) {
 
+			$field = self::adjust_field_type( $field );
+
+			if ( ! method_exists( __CLASS__, $field->field_type ) ) {
+
+				return;
+
+			}
+
 			call_user_func( array( __CLASS__, $field->field_type ), $field );
 
 		} else {
@@ -153,7 +161,7 @@ class Mad_Mimi_Form_Fields {
 
 		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) . $args->value ); ?>">
 
-			<input type="checkbox" value="<?php echo esc_attr( $args->value ); ?>" name="<?php echo esc_attr( $args->name ); ?>" id="<?php echo esc_attr( self::get_form_id( $args->name ) . $args->value ); ?>" class="<?php echo esc_attr( join( ' ', $field_classes ) ); ?>" />
+			<input type="checkbox" value="<?php echo esc_attr( $args->value ); ?>" name="<?php echo esc_attr( $args->name ); ?>" id="<?php echo esc_attr( self::get_form_id( $args->name ) . $args->value ); ?>" class="<?php echo esc_attr( join( ' ', $field_classes ) ); ?>" data-label="<?php echo esc_attr( $args->display ); ?>" />
 
 			<?php echo esc_html( $args->display ); ?>
 
@@ -449,4 +457,50 @@ class Mad_Mimi_Form_Fields {
 
 	}
 
+	/**
+	 * Displays the "Terms of Service" field.
+	 *
+	 * @param array $args Settings field arguments.
+	 */
+	public static function tos_link( $args ) {
+
+		$field_classes = array( 'mimi-field' );
+
+		// Is this field required?
+		if ( $args->required ) {
+			$field_classes[] = 'mimi-required';
+		}
+
+		$field_classes = (array) apply_filters( 'mimi_required_field_class', $field_classes, $args );
+		$field_options = ! empty( $args->options ) ? json_decode( $args->options ) : false;
+		$tos_link      = isset( $field_options->link ) ? $field_options->link : false;
+		?>
+
+		<label for="<?php echo esc_attr( self::get_form_id( $args->name ) ); ?>">
+
+			<a href="<?php echo esc_url( $tos_link ); ?>" target="_blank"><?php echo esc_html( $args->display ); ?></a>
+
+		</label>
+
+		<?php
+
+	}
+
+	/**
+	 * Adjust a field type to reuse existing methods.
+	 *
+	 * @return string Field type
+	 */
+	private static function adjust_field_type( $field ) {
+
+		if ( in_array( $field->field_type, [ 'tracking_option', 'age_check' ], true ) ) {
+
+			$field->value      = $field->display;
+			$field->field_type = 'checkbox';
+
+		}
+
+		return $field;
+
+	}
 }
