@@ -7,12 +7,6 @@ notifications:
     on_success: never
     on_failure: change
 
-branches:
-  only:
-    - /^v\d.*$/
-    - master
-    - develop
-
 cache:
   directories:
     - node_modules
