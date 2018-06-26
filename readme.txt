@@ -3,7 +3,7 @@ Contributors: madmimi, humanmade, xwp, illuminea, maor, beccawitz
 Tags: email, forms, mailing list, marketing, newsletter, opt-in, signup, subscribe, widget, contacts
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPL-2.0
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
