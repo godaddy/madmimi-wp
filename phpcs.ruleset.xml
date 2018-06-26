@@ -8,6 +8,7 @@
 		<exclude name="PSR2.ControlStructures.SwitchDeclaration.SpaceBeforeColonCASE"></exclude>
 		<exclude name="PSR2.ControlStructures.SwitchDeclaration.BodyOnNextLineCASE"></exclude>
 		<exclude name="Squiz.PHP.EmbeddedPhp.SpacingBeforeClose"></exclude>
+		<exclude name="Generic.Files.OneClassPerFile.MultipleFound"></exclude>
 	</rule>
 
 	<exclude-pattern>*/dev-lib/*</exclude-pattern>
