@@ -7,7 +7,7 @@
  */
 class Mad_Mimi_Form_Widget extends WP_Widget {
 
-	function __construct() {
+	public function __construct() {
 
 		parent::__construct( 'mimi-form', __( 'Mad Mimi Form', 'mad-mimi-sign-up-forms' ), array(
 			'classname'   => 'mimi-form',
@@ -22,7 +22,7 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 
 	}
 
-	function widget( $args, $instance ) {
+	public function widget( $args, $instance ) {
 
 		// Set the initial form ID value if one exists.
 		if ( empty( $instance['form'] ) ) {
@@ -61,7 +61,7 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 
 	}
 
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
 
@@ -73,7 +73,7 @@ class Mad_Mimi_Form_Widget extends WP_Widget {
 
 	}
 
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		// set defaults
 		$instance = wp_parse_args( (array) $instance, array(

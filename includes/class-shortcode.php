@@ -2,7 +2,7 @@
 
 class Mad_Mimi_Shortcode {
 
-	public function render( $atts ) {
+	public static function render( $atts ) {
 
 		$atts = shortcode_atts( array(
 			'id' => false,

@@ -22,7 +22,7 @@ class Mad_Mimi_Settings {
 	 */
 	public function action_admin_menu() {
 
-		$this->hook = add_options_page(
+		$this->hook = add_options_page( // @codingStandardsIgnoreLine
 			__( 'Mad Mimi Settings', 'mad-mimi-sign-up-forms' ),        // <title> tag
 			__( 'Mad Mimi Settings', 'mad-mimi-sign-up-forms' ),        // menu label
 			'manage_options',                         // required cap to view this page
@@ -156,8 +156,8 @@ class Mad_Mimi_Settings {
 		$screen = get_current_screen();
 
 		$screen->add_help_tab( array(
-			'title' => __( 'Overview', 'mad-mimi-sign-up-forms' ),
-			'id'    => 'mimi-overview',
+			'title'   => __( 'Overview', 'mad-mimi-sign-up-forms' ),
+			'id'      => 'mimi-overview',
 			'content' => sprintf(
 				'<h3>%1$s</h3>
 				<p>%2$s</p>
@@ -352,7 +352,7 @@ class Mad_Mimi_Settings {
 						foreach ( $forms->signups as $form ) :
 
 							$edit_link = add_query_arg( array(
-								'action' => 'edit_form',
+								'action'  => 'edit_form',
 								'form_id' => $form->id,
 							) );
 
