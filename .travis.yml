@@ -7,12 +7,6 @@ notifications:
     on_success: never
     on_failure: change
 
-branches:
-  only:
-    - /^v\d.*$/
-    - master
-    - develop
-
 cache:
   directories:
     - node_modules
@@ -27,6 +21,12 @@ env:
   - WP_VERSION=4.4 WP_MULTISITE=0
   - WP_VERSION=latest WP_MULTISITE=0
   - WP_VERSION=trunk WP_MULTISITE=0
+
+addons:
+  apt:
+    packages:
+      # Needed for `xmllint`.
+      - libxml2-utils
 
 matrix:
   fast_finish: true

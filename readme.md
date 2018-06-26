@@ -74,6 +74,9 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 
 ## Changelog ##
 
+### 1.7.0 ###
+* New: Add support for GDPR fields (Age consent, terms of service and tracking option)
+
 ### 1.6.0 ###
 * New: Reference to jQuery UI has been removed.
 * Tweak: Styles updated for MadMimi fancy fields.

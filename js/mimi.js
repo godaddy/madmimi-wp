@@ -106,9 +106,17 @@
 					invalidElements.push( $( this ) );
 					m.log( 'Email is NOT valid' );
 
-				} else if ( $( this ).is( '.mimi-required' ) && '' == $( this ).val() ) {
+				} else if ( $( this ).is( 'input[type="checkbox"]' ) && $( this ).hasClass( 'mimi-required' ) && ! $( this ).is( ':checked' ) ) {
+
+					// Empty checkbox.
 					invalidElements.push( $( this ) );
 					m.log( 'A required filled was not filled' );
+
+				} else if ( $( this ).is( '.mimi-required' ) && '' == $( this ).val() ) {
+
+					invalidElements.push( $( this ) );
+					m.log( 'A required filled was not filled' );
+
 				}
 
 			} );
