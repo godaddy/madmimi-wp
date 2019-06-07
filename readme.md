@@ -15,7 +15,7 @@ Add the Mad Mimi webform to your WordPress site! Easy to set up, the Mad Mimi pl
 
 ## Description ##
 
-The Official Mad Mimi Signup Form plugin makes it easy to grow your subscribers! Use this plugin to integrate your sign up forms into your WordPress site. To learn more about Mad Mimi, grab a [FREE forever account](https://madmimi.com) and explore.
+The Official Mad Mimi Signup Form plugin makes it easy to grow your subscribers! Use this plugin to integrate your sign up forms into your WordPress site.
 
 Once the plugin is activated, you can select and insert any of your Mad Mimi webforms right into your site by using a widget, shortcode, or template tag. Setup is easy; in Settings, simply enter your account email address and API key (found in your [Mad Mimi account](http://help.madmimi.com/where-can-i-find-my-api-key/) area), and you're all set.
 
