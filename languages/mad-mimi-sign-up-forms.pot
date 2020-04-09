@@ -1,265 +1,256 @@
+# Copyright (c) 2020 GoDaddy Operating Company, LLC. All Rights Reserved.
 msgid ""
 msgstr ""
-"Project-Id-Version: Official Mad Mimi Signup Forms\n"
-"POT-Creation-Date: 2015-06-29 14:20+0100\n"
-"PO-Revision-Date: 2015-06-29 14:20+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: en_US\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/madmimi/madmimi-wp/issues\n"
+"POT-Creation-Date: 2020-04-09 17:01:54+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: .\n"
+"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: includes/render.php:33
+#: includes/render.php:41
 msgid "Powered by Mad Mimi"
 msgstr ""
 
-#: includes/settings.php:26 includes/settings.php:27 includes/settings.php:236
+#: includes/render.php:385
+msgid "Month"
+msgstr ""
+
+#: includes/render.php:386
+msgid "January"
+msgstr ""
+
+#: includes/render.php:387
+msgid "Febuary"
+msgstr ""
+
+#: includes/render.php:388
+msgid "March"
+msgstr ""
+
+#: includes/render.php:389
+msgid "April"
+msgstr ""
+
+#: includes/render.php:390
+msgid "May"
+msgstr ""
+
+#: includes/render.php:391
+msgid "June"
+msgstr ""
+
+#: includes/render.php:392
+msgid "July"
+msgstr ""
+
+#: includes/render.php:393
+msgid "August"
+msgstr ""
+
+#: includes/render.php:394
+msgid "September"
+msgstr ""
+
+#: includes/render.php:395
+msgid "October"
+msgstr ""
+
+#: includes/render.php:396
+msgid "November"
+msgstr ""
+
+#: includes/render.php:397
+msgid "December"
+msgstr ""
+
+#: includes/render.php:402
+msgid "Day"
+msgstr ""
+
+#: includes/render.php:412
+msgid "Year"
+msgstr ""
+
+#: includes/settings.php:26 includes/settings.php:27 includes/settings.php:297
 msgid "Mad Mimi Settings"
 msgstr ""
 
-#: includes/settings.php:76
+#: includes/settings.php:89
 msgid "All transients were removed."
 msgstr ""
 
-#: includes/settings.php:87
+#: includes/settings.php:104
 msgid "Forms list was successfully updated."
 msgstr ""
 
-#: includes/settings.php:141
+#: includes/settings.php:171
 msgid "Overview"
 msgstr ""
 
-#: includes/settings.php:143
-#, php-format
-msgid ""
-"\n"
-"\t\t\t\t<h3>Instructions</h3>\n"
-"\t\t\t\t<p>Once the plugin is activated, you will be able to select and "
-"insert any of your Mad Mimi webforms right into your site. Setup is easy. "
-"Below, simply enter your account email address and API key (found in your "
-"Mad Mimi account [%1$s] area). Here are the 3 ways you can display a webform "
-"on your site:</p>\n"
-"\t\t\t\t<ul>\n"
-"\t\t\t\t\t<li><strong>Widget:</strong> Go to Appearance &rarr; widgets and "
-"find the widget called “Mad Mimi Form” and drag it into the widget area of "
-"your choice. You can then add a title and select a form!</li>\n"
-"\t\t\t\t\t<li><strong>Shortcode:</strong> You can add a form to any post or "
-"page by adding the shortcode (ex. [madmimi id=80326])  in the page/post "
-"editor</li>\n"
-"\t\t\t\t\t<li><strong>Template Tag:</strong> You can add the following "
-"template tag into any WordPress file: <code>%2$s</code>. Ex. <code>%3$s</"
-"code></li>\n"
-"\t\t\t\t</ul>"
+#: includes/settings.php:210
+msgid "Mad Mimi Help Docs"
 msgstr ""
 
-#: includes/settings.php:153
-msgid ""
-"\n"
-"\t\t\t<p><strong>For more information:</strong></p>\n"
-"\t\t\t<p><a href=\"http://madmimi.com\" target=\"_blank\">Mad Mimi</a></p>\n"
-"\t\t\t<p><a href=\"http://help.madmimi.com\" target=\"_blank\">Mad Mimi Help "
-"Docs</a></p>\n"
-"\t\t\t<p><a href=\"http://blog.madmimi.com\" target=\"_blank\">Mad Mimi "
-"Blog</a></p>\n"
-"\t\t\t<p><a href=\"mailto:support@madmimi.com\" target=\"_blank\" class="
-"\"button\">Contact Mad Mimi</a></p>\n"
-"\t\t"
+#: includes/settings.php:211
+msgid "Mad Mimi Blog"
 msgstr ""
 
-#: includes/settings.php:180
+#: includes/settings.php:212
+msgid "Contact Mad Mimi"
+msgstr ""
+
+#: includes/settings.php:236
 msgid "Account Details"
 msgstr ""
 
-#: includes/settings.php:187
+#: includes/settings.php:243
 msgid "Mad Mimi Username"
 msgstr ""
 
-#: includes/settings.php:194
+#: includes/settings.php:250
 msgid "Your Mad Mimi username (email address)"
 msgstr ""
 
-#: includes/settings.php:200
+#: includes/settings.php:257
 msgid "Mad Mimi API Key"
 msgstr ""
 
-#: includes/settings.php:207
-msgctxt "settings page"
+#: includes/settings.php:266
 msgid "Where can I find my API key?"
 msgstr ""
 
-#: includes/settings.php:222
+#: includes/settings.php:283
 msgid "Display \"Powered by Mad Mimi\"?"
 msgstr ""
 
-#: includes/settings.php:242
-msgctxt "madmimi header note"
+#: includes/settings.php:303
 msgid "Enjoy the Mad Mimi Experience, first hand."
 msgstr ""
 
-#: includes/settings.php:244
-msgctxt "header note"
+#: includes/settings.php:305
 msgid ""
 "Add your Mad Mimi webform to your WordPress site! Easy to set up, the Mad "
 "Mimi plugin allows your site visitors to subscribe to your email list."
 msgstr ""
 
-#: includes/settings.php:245
-#, php-format
-msgctxt "header note"
+#: includes/settings.php:311
+#. translators: 1. Link to the Mad Mimi account signup.
 msgid "Don't have a Mad Mimi account? Get one in less than 2 minutes! %s"
 msgstr ""
 
-#: includes/settings.php:245
-msgctxt "header note"
+#: includes/settings.php:314
 msgid "Sign Up Now"
 msgstr ""
 
-#: includes/settings.php:259
-msgctxt "save settings button"
+#: includes/settings.php:332
 msgid "Save Settings"
 msgstr ""
 
-#: includes/settings.php:261
+#: includes/settings.php:336
 msgid "Available Forms"
 msgstr ""
 
-#: includes/settings.php:267 includes/settings.php:275
+#: includes/settings.php:342 includes/settings.php:350
 msgid "Form Name"
 msgstr ""
 
-#: includes/settings.php:268 includes/settings.php:276
+#: includes/settings.php:343 includes/settings.php:351
 msgid "Form ID"
 msgstr ""
 
-#: includes/settings.php:269 includes/settings.php:277
+#: includes/settings.php:344 includes/settings.php:352
 msgid "Shortcode"
 msgstr ""
 
-#: includes/settings.php:303
+#: includes/settings.php:380
 msgid "Opens in a new window"
 msgstr ""
 
-#: includes/settings.php:303
+#: includes/settings.php:380
 msgid "Edit form in Mad Mimi"
 msgstr ""
 
-#: includes/settings.php:306
+#: includes/settings.php:383
 msgid "Preview"
 msgstr ""
 
-#: includes/settings.php:320
+#: includes/settings.php:402
 msgid "No forms found"
 msgstr ""
 
-#: includes/settings.php:331
+#: includes/settings.php:413
 msgid "Not seeing your form?"
 msgstr ""
 
-#: includes/settings.php:331
+#: includes/settings.php:413
 msgid "Refresh Forms"
 msgstr ""
 
-#: includes/settings.php:336
+#: includes/settings.php:418
 msgid "Debug"
 msgstr ""
 
-#: includes/settings.php:338
+#: includes/settings.php:420
 msgid "Erase All Data"
 msgstr ""
 
-#: includes/settings.php:339
+#: includes/settings.php:421
 msgid "Erase Transients"
 msgstr ""
 
-#: includes/settings.php:360
+#: includes/settings.php:444
 msgid ""
 "The credentials are incorrect! Please verify that you have entered them "
 "correctly."
 msgstr ""
 
-#: includes/settings.php:367
+#: includes/settings.php:451
 msgid "Connection with Mad Mimi has been established! You're all set!"
 msgstr ""
 
-#: includes/settings.php:374
+#: includes/settings.php:458
 msgid "Please fill in the username and the API key first."
 msgstr ""
 
-#: includes/settings.php:388
+#: includes/settings.php:474
 msgid ""
 "Please enter your Mad Mimi username and API Key in order to be able to "
 "create forms."
 msgstr ""
 
-#: includes/widget.php:12 includes/widget.php:27
+#: includes/widget.php:12 includes/widget.php:40
 msgid "Mad Mimi Form"
 msgstr ""
 
 #: includes/widget.php:14
-msgctxt "widget description"
 msgid "Embed any Mad Mimi webform in your sidebar."
 msgstr ""
 
-#: includes/widget.php:71
+#: includes/widget.php:88
 msgid "Title:"
 msgstr ""
 
-#: includes/widget.php:76
+#: includes/widget.php:93
 msgid "Additional Text:"
 msgstr ""
 
-#: includes/widget.php:84
+#: includes/widget.php:101
 msgid "Form:"
 msgstr ""
 
-#: includes/widget.php:96
-#, php-format
-msgid "Please set up your Mad Mimi account in the %ssettings page%s."
+#: includes/widget.php:118
+#. translators: Link to the settings page.
+msgid "Please set up your Mad Mimi account in the %s."
 msgstr ""
 
-#: madmimiofficial.php:143
-msgctxt "ajax response"
-msgid "Thank you for signing up!"
-msgstr ""
-
-#: madmimiofficial.php:144
-msgctxt "ajax response"
-msgid ""
-"Thank you for signing up! Please check your email to confirm your "
-"subscription."
-msgstr ""
-
-#: madmimiofficial.php:145
-msgctxt "ajax response"
-msgid "Oops! There was a problem. Please try again."
-msgstr ""
-
-#: madmimiofficial.php:146
-msgctxt "ajax response"
-msgid "There was a problem. Please fill all required fields."
-msgstr ""
-
-#: madmimiofficial.php:155
-msgid "Settings"
-msgstr ""
-
-#: madmimiofficial.php:186
-msgid "Mad Mimi is almost ready."
-msgstr ""
-
-#: madmimiofficial.php:186
-msgid "You must enter your Mad Mimi username &amp; API key for it to work."
-msgstr ""
-
-#: madmimiofficial.php:187
-msgid "Let's do it!"
+#: includes/widget.php:122
+msgid "settings page"
 msgstr ""

@@ -35,7 +35,7 @@
     "grunt-dev-update": "^2.0.0",
     "grunt-text-replace": "^0.4.0",
     "grunt-wp-deploy": "^2.0.0",
-    "grunt-wp-i18n": "^1.0.0",
+    "grunt-wp-i18n": "^1.0.3",
     "grunt-wp-readme-to-markdown": "^2.0.1",
     "matchdep": "^2.0.0"
   },
