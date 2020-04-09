@@ -87,7 +87,7 @@ class Mad_Mimi_Settings {
 							}
 
 						add_settings_error( $this->slug, 'mimi-reset', __( 'All transients were removed.', 'mad-mimi-sign-up-forms' ), 'updated' );
-						
+
 						}
 					}
 
@@ -109,7 +109,7 @@ class Mad_Mimi_Settings {
 					$forms = Mad_Mimi_Dispatcher::get_forms();
 
 					if ( $forms && ! empty( $forms->signups ) ) {
-						
+
 						foreach ( $forms->signups as $form ) {
 
 							delete_transient( "mimi-form-{$form->id}" );
