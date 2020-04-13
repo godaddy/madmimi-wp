@@ -75,14 +75,22 @@ class Mad_Mimi_Settings {
 						delete_transient( 'mimi-' . $settings['username'] . '-lists' );
 
 						// mass-removal of all forms
-						foreach ( Mad_Mimi_Dispatcher::get_forms()->signups as $form ) {
 
-							delete_transient( 'mimi-form-' . $form->id );
+						$forms = Mad_Mimi_Dispatcher::get_forms();
 
-						}
+						if ( $forms && ! empty( $forms->signups ) ) {
+
+							foreach ( $forms->signups as $form ) {
+
+								delete_transient( 'mimi-form-' . $form->id );
+
+							}
 
 						add_settings_error( $this->slug, 'mimi-reset', __( 'All transients were removed.', 'mad-mimi-sign-up-forms' ), 'updated' );
+
+						}
 					}
+
 
 					break;
 
@@ -96,13 +104,17 @@ class Mad_Mimi_Settings {
 							add_settings_error( $this->slug, 'mimi-reset', __( 'Forms list was successfully updated.', 'mad-mimi-sign-up-forms' ), 'updated' );
 
 						}
-
 					}
 
-					foreach ( (array) Mad_Mimi_Dispatcher::get_forms()->signups as $form ) {
+					$forms = Mad_Mimi_Dispatcher::get_forms();
 
-						delete_transient( "mimi-form-{$form->id}" );
+					if ( $forms && ! empty( $forms->signups ) ) {
 
+						foreach ( $forms->signups as $form ) {
+
+							delete_transient( "mimi-form-{$form->id}" );
+
+						}
 					}
 
 					break;
