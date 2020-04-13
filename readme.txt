@@ -2,8 +2,8 @@
 Contributors: madmimi, humanmade, xwp, illuminea, maor, beccawitz
 Tags: email, forms, mailing list, marketing, newsletter, opt-in, signup, subscribe, widget, contacts
 Requires at least: 3.8
-Tested up to: 5.2
-Stable tag: 1.7.0
+Tested up to: 5.4
+Stable tag: 1.7.1
 License: GPL-2.0
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,10 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 4. The widget on the widgets page.
 
 == Changelog ==
+
+= 1.7.1 =
+* Fix: Resolve PHP notice.
+* Tweak: Test with and bump support for WordPress 5.4.
 
 = 1.7.0 =
 * New: Add support for GDPR fields (Age consent, terms of service and tracking option)
