@@ -74,6 +74,10 @@ Your API Key can be found in your Mad Mimi account area. For more details [see t
 
 ## Changelog ##
 
+### 1.7.1 ###
+* Fix: Resolve PHP notice.
+* Tweak: Test with and bump support for WordPress 5.4.
+
 ### 1.7.0 ###
 * New: Add support for GDPR fields (Age consent, terms of service and tracking option)
 
